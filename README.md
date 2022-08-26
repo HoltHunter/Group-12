@@ -16,7 +16,15 @@ The project is built with the following languages & techniques:
 Team Members:
 | Name | Net ID | GitHub Email Address | Role |
 |---|---|---|---|
-| Jessica Henry ||||
+| Jessica Henry |jnh426|jnm0024@gmail.com|Project Lead|
 | Joel Huber ||||
 | Holt Hunter ||||
 | Michael Wienczkowski ||||
+
+Team Member Availability:
+| Name | Monday | Tuesday | Wednesday | Thursday | Friday | Sat | Sunday | 
+|---|---|---|---|---|---|---|---|
+| Jessica Henry | 5:30-6:30PM | 5:00 - 5:30PM | 5:30-8PM | 6:15-7PM | Anytime | Rather Not |12-4PM |
+| Joel Huber ||||||||
+| Holt Hunter ||||||||
+| Michael Wienczkowski ||||||||
