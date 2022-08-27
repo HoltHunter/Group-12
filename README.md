@@ -11,13 +11,15 @@ The initial requirements were provided as:
 * A user should be able to like, comment and share the status/timeline post of their friends.
 
 The project is built with the following languages & techniques:
-* ???
+* Frontend: Javascript, HTML, CSS, Bootstrap
+* Backend: NodeJS
+* Database: Postgresql ? 
 
 Team Members:
 | Name | Net ID | GitHub Email Address | Role |
 |---|---|---|---|
 | Jessica Henry |jnh426|jnm0024@gmail.com|Project Lead|
-| Joel Huber ||||
+| Joel Huber | jth124 | username: hellojoelhuber |  |
 | Holt Hunter ||||
 | Michael Wienczkowski ||||
 
@@ -25,6 +27,6 @@ Team Member Availability:
 | Name | Monday | Tuesday | Wednesday | Thursday | Friday | Sat | Sunday | 
 |---|---|---|---|---|---|---|---|
 | Jessica Henry | 5:30-6:30PM | 5:00 - 5:30PM | 5:30-8PM | 6:15-7PM | Anytime | Rather Not |12-4PM |
-| Joel Huber ||||||||
+| Joel Huber | Anytime, with notice | ditto | ditto | ditto | ditto | ditto | ditto |
 | Holt Hunter ||||||||
 | Michael Wienczkowski ||||||||
