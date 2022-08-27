@@ -21,7 +21,7 @@ Team Members:
 | Jessica Henry |jnh426|jnm0024@gmail.com|Project Lead|
 | Joel Huber | jth124 | username: hellojoelhuber |  |
 | Holt Hunter ||||
-| Michael Wienczkowski ||||
+| Michael Wienczkowski | mhw205 | mhw205@msstate.edu | Individual Contributor |
 
 Team Member Availability:
 | Name | Monday | Tuesday | Wednesday | Thursday | Friday | Sat | Sunday | 
@@ -29,4 +29,4 @@ Team Member Availability:
 | Jessica Henry | 5:30-6:30PM | 5:00 - 5:30PM | 5:30-8PM | 6:15-7PM | Anytime | Rather Not |12-4PM |
 | Joel Huber | Anytime, with notice | ditto | ditto | ditto | ditto | ditto | ditto |
 | Holt Hunter ||||||||
-| Michael Wienczkowski ||||||||
+| Michael Wienczkowski | 5:30-8:00PM | 5:30-8:00PM | 5:30-8:00PM | 6:30-8:00PM | 5:30-8:00PM | Anytime | Anytime |
