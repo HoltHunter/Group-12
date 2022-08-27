@@ -29,4 +29,4 @@ Team Member Availability:
 | Jessica Henry | 5:30-6:30PM | 5:00 - 5:30PM | 5:30-8PM | 6:15-7PM | Anytime | Rather Not |12-4PM |
 | Joel Huber | Anytime, with notice | ditto | ditto | ditto | ditto | ditto | ditto |
 | Holt Hunter ||||||||
-| Michael Wienczkowski | 5:30-8:00PM | 5:30-8:00PM | 5:30-8:00PM | 6:30-8:00PM | 5:30-8:00PM | Anytime | Anytime |
+| Michael Wienczkowski | 5:30-9PM | 5:30-9PM | 5:30-9PM | 6:30-9PM | 5:30-9PM | Anytime | Anytime |
