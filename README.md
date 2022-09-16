@@ -23,7 +23,7 @@ Team Members:
 | Name | Net ID | GitHub Email Address | Role |
 |---|---|---|---|
 | Jessica Henry |jnh426|jnm0024@gmail.com|Project Lead|
-| Joel Huber | jth124 | username: hellojoelhuber |  |
+| Joel Huber | jth124 | username: hellojoelhuber | Developer |
 | Holt Hunter |lhh118|landonhh99@gmail.com|Front End Web Developer|
 | Michael Wienczkowski | mhw205 | mhw205@msstate.edu | Software Engineer |
 
