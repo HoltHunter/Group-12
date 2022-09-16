@@ -2,26 +2,30 @@
 
 This GitHub repo contains the project and project artifacts for the Lab section of CSE 6214.
 
-The goal of the project is to build a web-based social media platform.
+## Project Goal and Mission
+The goal of the project is to build a web-based social media platform. The web application will allow end users to connect with a community of individuals that are united by similar interests, beliefs, ideas, and/or goals. This platform will allow users to connect with their friends, family, and others by posting content on their profile/timeline. Users should be able to post status updates, photos, videos, among other content that is desired. The social media web-application will also provide a platform for a variety of categories of social networking, such as content sharing, media sharing, discussions, consumer reviews, relationships, and/or blogging. There will be 2 versions developed for this project throughout the semester.
 
+## Project Requirements
 The initial requirements were provided as:
 * A user should be able to login into his account to be able to connect with his friends and access their timeline.
 * A user should be able to compose, edit and post status on his/her timeline.
 * A user should be able to send and accept friend requests from others which will allow them to be friend with others and enable them to interact with them.
 * A user should be able to like, comment and share the status/timeline post of their friends.
 
+## Project Build Details
 The project is built with the following languages & techniques:
 * Frontend: Javascript, HTML, CSS, Bootstrap
 * Backend: NodeJS
-* Database: Postgresql ? 
+* Database: Postgresql
 
+## Team Information
 Team Members:
 | Name | Net ID | GitHub Email Address | Role |
 |---|---|---|---|
 | Jessica Henry |jnh426|jnm0024@gmail.com|Project Lead|
 | Joel Huber | jth124 | username: hellojoelhuber |  |
 | Holt Hunter |lhh118|landonhh99@gmail.com|Front End Web Developer|
-| Michael Wienczkowski | mhw205 | mhw205@msstate.edu | Individual Contributor |
+| Michael Wienczkowski | mhw205 | mhw205@msstate.edu | Software Engineer |
 
 Team Member Availability:
 | Name | Monday | Tuesday | Wednesday | Thursday | Friday | Sat | Sunday | 
