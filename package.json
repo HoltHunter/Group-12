@@ -1,0 +1,20 @@
+{
+  "name": "cse-media",
+  "version": "1.0.0",
+  "description": "This GitHub repo contains the project and project artifacts for the Lab section of CSE 6214.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "chai-http": "^4.3.0",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  }
+}
