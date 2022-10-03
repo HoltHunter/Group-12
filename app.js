@@ -4,26 +4,6 @@ const bodyParser = require('body-parser')
 const { Pool, Client } = require('pg')
 const setup = require('./src/setup.js')
 
-// THIS IS ONE EXAMPLE OF HOW WE CAN CONNECT TO THE DB
-// IT WAS WRITTEN TO RUN THE MIGRATIONS, BEFORE I MOVED THAT
-// CODE TO setup.js. 
-// const pool = new Pool({
-// 	database: "cse_database",
-// 	user: "cse_username",
-// 	password: "cse_password",
-// 	host: "localhost",
-// 	port: 5432,
-// 	ensureDatabaseExists: true,
-// 	defaultDatabase: "postgres-cse"
-// })
-// const client = new Client(pool)
-// await client.connect()
-// try {
-	// setup.connect(pool, "./migrations")
-// } finally {
-	// client.end()
-// }
-
 setup.connect()
 
 const app = express()
@@ -31,9 +11,32 @@ const jsonParser = bodyParser.json()
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+const pool = new Pool({
+	database: "cse_database",
+	user: "cse_username",
+	password: "cse_password",
+	host: "localhost",
+	port: 5432,
+	ensureDatabaseExists: true,
+	defaultDatabase: "postgres-cse"
+})
+
 app.get('/', function (req, res) {
-    console.log(req.body)
 	res.send('Hello World')
+})
+
+app.get('/users', (req, res) => {
+	(async () => {
+		const client = await pool.connect()
+		try {
+			const result = await client.query('SELECT * FROM users')
+			res.send(result.rows)
+		} catch (err) {
+			console.log(err.stack)
+		} finally {
+			client.release()
+		}
+	})()
 })
 
 app.post('/login', jsonParser, function (req, res) {
