@@ -26,7 +26,6 @@ const setup = require('./src/setup.js')
 
 setup.connect()
 
-
 const app = express()
 const jsonParser = bodyParser.json()
 
