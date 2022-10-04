@@ -9,7 +9,7 @@ const users = {
     }
 }
 
-exports.authenticate = function(username, password) {
+exports.authenticate = (username, password) => {
     if (users[username] && users[username].password === password) {
         return true
     } else {
