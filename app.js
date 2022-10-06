@@ -30,7 +30,57 @@ app.get('/users', (req, res) => {
 	(async () => {
 		const client = await pool.connect()
 		try {
-			const result = await client.query('SELECT * FROM users')
+			const result = await client.query(`
+				SELECT u.id, u.first_name, u.last_name 
+				FROM users u
+			`)
+			res.send(result.rows)
+		} catch (err) {
+			console.log(err.stack)
+		} finally {
+			client.release()
+		}
+	})()
+})
+
+// MARK: - POST - SEARCH 
+app.post('/searchUsers', jsonParser, (req, res) => {
+	(async () => {
+		const client = await pool.connect()
+		try {
+			const userId = Number(req.body.userId)
+			const result = await client.query(`
+				SELECT u.id, u.first_name, u.last_name, 
+					CASE WHEN ((f.user_id = ${ userId } OR f.other_user_id = ${ userId })
+					OR (f2.other_user_id = ${ userId } OR f2.user_id = ${ userId })) 
+						THEN 'true' ELSE 'false' END 
+				FROM users u 
+				LEFT JOIN friends f ON u.id = f.other_user_id 
+				LEFT JOIN friends f2 ON u.id = f2.user_id 
+				WHERE u.id != ${ userId }
+				;
+			`)
+			res.send(result.rows)
+		} catch (err) {
+			console.log(err.stack)
+		} finally {
+			client.release()
+		}
+	})()
+})
+
+app.post('/searchFriendRequests', jsonParser, (req, res) => {
+	(async () => {
+		const client = await pool.connect()
+		try {
+			const userId = Number(req.body.userId)
+			const result = await client.query(`
+				SELECT fr.id, fr.request_from_id, fr.date_created
+				FROM friend_requests fr 
+				WHERE fr.decision IS NULL 
+				AND fr.user_id = ${ userId }
+				;
+			`)
 			res.send(result.rows)
 		} catch (err) {
 			console.log(err.stack)
@@ -41,7 +91,7 @@ app.get('/users', (req, res) => {
 })
 
 
-// MARK: - POST
+// MARK: - POST - CREATE
 app.post('/createUser', jsonParser, function (req, res) {
 	(async () => {
 		const client = await pool.connect()
@@ -54,7 +104,8 @@ app.post('/createUser', jsonParser, function (req, res) {
 				INSERT INTO users (first_name, last_name, username, password) 
 				VALUES('${first_name}', '${last_name}', '${username}', '${password}');
 			`)
-			res.send("Success")
+			res.statusCode = 200
+			res.send()
 		} catch (err) {
 			console.log(err.stack)
 		} finally {
@@ -113,12 +164,35 @@ app.post('/acceptFriend', jsonParser, function (req, res) {
 	})()
 })
 
+// MARK: POST - LOGIN
 app.post('/login', jsonParser, function (req, res) {
-	if (authenticate.authenticate(req.body.username, req.body.password)) {
-		res.send('welcome, ' + req.body.username)
-	} else {
-		res.send('No entry for you, villain.')
-	}
+	(async () => {
+		const client = await pool.connect()
+		try {
+			const username = req.body.username
+			const password = req.body.password
+			const result = await client.query(`
+				SELECT * 
+				FROM users 
+				WHERE username = '${username}' 
+				AND password = '${password}';
+			`)
+			console.log(result.rows)
+			console.log(result.rows.length)
+			console.log(result.rows.length === 1)
+			if (result.rows.length === 1) {
+				res.statusCode = 200
+				res.send()
+			} else {
+				res.statusCode = 403
+				res.send()
+			}
+		} catch (err) {
+			console.log(err.stack)
+		} finally {
+			client.release()
+		}
+	})()
 })
 
 
