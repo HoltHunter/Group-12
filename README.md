@@ -34,3 +34,32 @@ Team Member Availability:
 | Joel Huber | Anytime, with notice | ditto | ditto | ditto | ditto | ditto | ditto |
 | Holt Hunter |3:00-4PM|Rather Not|3:30-8PM|3:30-8PM|3:30-7PM|TBD|3:00-5pm|
 | Michael Wienczkowski | 5:30-9PM | 5:30-9PM | 5:30-9PM | 6:30-9PM | 5:30-9PM | Anytime | Anytime |
+
+
+## Endpoints
+
+### GET
+
+* **/users**: Returns all users in the db.
+
+### POST
+
+* **/createUser**: Adds a user to the db. The body must contain the following object:
+{
+    "firstName":"Tony",
+    "lastName":"Stark",
+    "username":"tony",
+    "password":"ironman"
+}
+
+* **/requestFriend**: Adds a friend request to the db. The body must contain the following object:
+{
+    "fromId":"2",
+    "toId":"1"
+}
+
+* **/acceptFriend**: Sets the friend request to true (accepted) or false (rejected), and if accepted, creates a record in friends table. The body must contain the following object:
+{
+    "request_id":"2",
+    "decision":"false"
+}
