@@ -39,6 +39,11 @@ app.get('/users', (req, res) => {
 	})()
 })
 
+app.post('/test', function (req, res) {
+	console.log("connected");
+	res.redirect("/test");
+})
+
 app.post('/login', jsonParser, function (req, res) {
 	if (authenticate.authenticate(req.body.username, req.body.password)) {
 		res.send('welcome, ' + req.body.username)
@@ -48,5 +53,5 @@ app.post('/login', jsonParser, function (req, res) {
 })
 
 app.listen(8080, function () {
-    console.log('App listening on port 8080!')
+    console.log('App listening on port 8080')
 })
