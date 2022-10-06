@@ -14,6 +14,7 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "helmet": "^6.0.0",
-    "socket.io": "^4.5.2"
+    "socket.io": "^4.5.2",
+    "yup": "^0.32.11"
   }
 }

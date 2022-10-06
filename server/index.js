@@ -2,7 +2,8 @@ const express = require("express");     //import express
 const {Server} = require("socket.io");  //instance of a potential server for web socket requests
 const app = express();                  //instantiate application using express app initializer
 const helmet = require("helmet");       //helmet provides additional security
-
+const cors = require("cors");
+const authRouter = require("./authRouter");
 
 const server = require("http").createServer(app);   //listen for http requests and is passed through the express application
 
@@ -18,7 +19,13 @@ const io = new Server(server, {
 });
 
 app.use(helmet());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+}))
 app.use(express.json()); //parses JSON via express server, utilize as JS object
+
+app.use("/auth", authRouter);
 
 app.get("/", (req, res) => {
     res.json("hi");
