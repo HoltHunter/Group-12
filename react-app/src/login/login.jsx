@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import * as Yup from "yup";
 import {
   Flex,
@@ -18,16 +18,21 @@ import {
 } from "@chakra-ui/react";
 import { FaUserAlt, FaEnvelope, FaLock } from "react-icons/fa";
 import { useFormik } from "formik";
+//import { useNavigate } from "react-router";
+//import { AccountContext } from "../AccountStatus";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 const CFaEmail = chakra(FaEnvelope);
 
-
-
 const Login = () => {
+  //const [ setUser ] = useContext(AccountContext);
+  
   const [showPassword, setShowPassword] = useState(false);
   const handleShowClick = () => setShowPassword(!showPassword);
+
+  //const [setError] = useState(null);
+  //const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: { username: "", password: "" },
@@ -57,6 +62,12 @@ const Login = () => {
         })
         .then(data => {
           if (!data) return;
+          //setUser({ ...data });
+            //if (data.status) {
+              //setError(data.status);
+            //} else if (data.loggedIn) {
+              //navigate("/home");
+            //}
           console.log(data);
         });
     }}

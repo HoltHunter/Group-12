@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from "react-router-dom";
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from "react-router-dom";  //Using React Router
 import { ChakraProvider } from "@chakra-ui/react"; //Using Chakra UI libraries
 import App from './App';
 

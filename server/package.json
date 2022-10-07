@@ -10,10 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "helmet": "^6.0.0",
+    "pg": "^8.8.0",
+    "session": "^0.1.0",
+    "sessions": "^0.0.2-7",
     "socket.io": "^4.5.2",
     "yup": "^0.32.11"
   }
