@@ -198,5 +198,5 @@ app.post('/login', jsonParser, function (req, res) {
 
 // MARK: - LISTEN
 app.listen(8080, function () {
-    console.log('App listening on port 8080!')
+    console.log('App listening on port 8080')
 })
