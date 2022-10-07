@@ -42,7 +42,15 @@ Team Member Availability:
 
 * **/users**: Returns all users in the db.
 
-### POST
+### POST - LOGIN
+
+* **/login**: Returns 200 or 403. The body must contain the following object:
+{
+    "username":"tony",
+    "password":"ironman"
+}
+
+### POST - CREATE
 
 * **/createUser**: Adds a user to the db. The body must contain the following object:
 {
@@ -62,4 +70,16 @@ Team Member Availability:
 {
     "request_id":"2",
     "decision":"false"
+}
+
+### POST - SEARCH
+
+* **/searchUsers**: Send a user ID to receive a list of users + friends boolean. 
+{
+    "userId":"2"
+}
+
+* **/searchFriendReqests**: Send a user ID to receive a list of open friend requests. If none are open, returns an empty array. 
+{
+    "userId":"2"
 }
