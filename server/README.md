@@ -18,6 +18,8 @@ You can test if the server is running by sending a GET to '/'
 
 * **GET /login**: Returns whether a session exists for a particular user.
 
+* **POST /logout**: Destroys the session.
+
 ### /create
 
 * **POST /newUser**: Adds a user to the db. The body must contain the following object:
