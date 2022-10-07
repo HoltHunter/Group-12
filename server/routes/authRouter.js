@@ -10,16 +10,15 @@ const formSchema = Yup.object({
 })
 
 router
-  	.route("/login")
-  	.get(async (req, res) => {
+  	.get("/login", async (req, res) => {
     	console.log(req.session);
       	if (req.session.user && req.session.user.username) {
-          	res.json({ loggedIn: true, username: req.session.user.username });
+          	res.json({ loggedIn: true, userId: req.session.user.id });
       	} else {
           	res.json({ loggedIn: false});
       	}
   	})
-  	.post(async (req, res) => {
+  	.post("/login", async (req, res) => {
       	const formData = req.body;
       	formSchema
           	.validate(formData)
@@ -41,12 +40,16 @@ router
 				username: req.body.username,
 				id: result.rows[0].id,
 			};
-			res.json({ loggedIn: true, username: username });
-			console.log(req.session);
+			res.json({ loggedIn: true, username: username, userId: result.rows[0].id });
 		} else {
 			res.statusCode = 403
 			res.json({ loggedIn: false, status: "Wrong username or password!" });
 		}
-	});
+	})
+	.post("/logout", async (req, res) => {
+		req.session.destroy()
+		res.statusCode = 200
+		res.json({ loggedIn: false, status: "Successfully logged out!" });
+	})
 
 module.exports = router;
