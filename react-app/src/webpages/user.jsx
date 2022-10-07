@@ -13,73 +13,20 @@ class User extends React.Component {
     state = {
         usersInfo: [],
         searchTerm: "",
-        value: ""
+        value: "",
+        session: [],
+        openRequests: [],
+        friends: []
     }
     
- /*    searchToggle = () => {
-
-        React.forwardRef(({children, onClick}, ref) => (
-            <a
-                href=""
-                ref={ref}
-                onClick={(e) => {
-                e.preventDefault();
-                onClick(e);
-                }}
-            >
-                {children}
-                &#x25bc;
-            </a>
-        ));
-    }
-
-    CustomMenu = () => {
-        React.forwardRef(
-        ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
-      
-          return (
-            <div
-              ref={ref}
-              style={style}
-              className={className}
-              aria-labelledby={labeledBy}
-            >
-              <Form.Control
-                autoFocus
-                className="mx-3 my-2 w-auto"
-                placeholder="Type to filter..."
-                onChange={(e) => {this.setState({searchTerm: e.target.value})}}
-                value={this.state.value}
-              />
-              <ul className="list-unstyled">
-              {this.state.usersInfo.filter((val)=> {
-                    if (this.state.searchTerm == "") {
-                        return ""
-                    }
-                    if (val.first_name.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
-                        return val
-                    }
-                }).map(( listValue, index ) => {
-                    return (
-                        <ListGroup key={index}>
-
-                                <ListGroup.Item action href="#">{listValue.first_name}</ListGroup.Item>
-
-                        </ListGroup>
-                    );
-                })}
-              </ul>
-            </div>
-          );
-        },
-      );
-    } */
+ 
     componentDidMount = () => {
         this.getUsers();
+        this.getSession();
     }
 
     getUsers = () => {
-        axios.get('/users')
+        axios.get('/search/users')
         .then(response => {
             //const data = response.data;
             this.setState({ usersInfo: response.data })
@@ -88,28 +35,74 @@ class User extends React.Component {
         .catch(() => {
             alert('User list NOT found');
         })
+    
+    }
 
-      
+    getSession = () => {
+        axios.get('/auth/login')
+        .then(response => {
+            //const data = response.data;
+            this.setState({ session: response.data })
+            console.log(this.state.session);
+        })
+        .catch(() => {
+            alert('User list NOT found');
+        })
+    }
+
+
+    sendRequest = (userid, e) => {
+        e.preventDefault();
+        fetch("http://localhost:5000/create/friendRequest", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({fromId: this.state.session.id, toId: userid}),
+        })
+        console.log("sent a request to", userid);
+        console.log("From", this.state.session.id);
+    }
+
+    getOpenRequests = () => {
+        fetch("http://localhost:5000/search/friendRequests", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({userId: this.state.session.id}),
+        })
+        .catch(err => {
+            return;
+        })
+        .then(data => {
+            this.setState({ openRequests: data })
+        });
+    }
+
+    getCurrentFriends = () => {
+        fetch("http://localhost:5000/search/friendRequests", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({userId: this.state.session.id}),
+        })
+        .catch(err => {
+            return;
+        })
+        .then(data => {
+            this.setState({ friends: data })
+        });
     }
 
     render() {
          return(
-/*             <Dropdown>
-                <Dropdown.Toggle as={this.searchToggle} id="dropdown-custom-components">
-                Custom toggle
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu as={this.CustomMenu}>
-                <Dropdown.Item eventKey="1">Red</Dropdown.Item>
-                <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
-                <Dropdown.Item eventKey="3" active>
-                    Orange
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>, */
              <div>
-                <h1>Search User</h1>
+                <h1>Hi {this.state.session.username}</h1>
                 <input type="text" placeholder="Search..." onChange={event => {this.setState({searchTerm: event.target.value})}}/>
                 {this.state.usersInfo.filter((val)=> {
                     if (this.state.searchTerm == "") {
@@ -124,7 +117,7 @@ class User extends React.Component {
 
                                 <ListGroup.Item>
                                     <h5>{listValue.first_name}</h5>
-                                    <Button variant="outline-success">Send Friend Request</Button>
+                                    <Button variant="outline-success" onClick={(e) => this.sendRequest(listValue.first_name, e)}>Send Friend Request</Button>
                                 </ListGroup.Item>
 
                         </ListGroup>

@@ -9,7 +9,7 @@ router
         const client = await pool.connect()
         try {
             const result = await client.query(`
-                SELECT u.id, u.first_name, u.last_name 
+                SELECT u.id, u.first_name, u.last_name, username 
                 FROM users u
             `)
             res.send(result.rows)
