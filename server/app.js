@@ -1,12 +1,24 @@
 const express = require("express");     //import express
 const {Server} = require("socket.io");  //instance of a potential server for web socket requests
-const app = express();                  //instantiate application using express app initializer
 const helmet = require("helmet");       //helmet provides additional security
 const cors = require("cors");
-const authRouter = require("./authRouter");
 const session = require("express-session");
+
+const bodyParser = require('body-parser')
+const setup = require('./src/setup.js')
+
+const app = express();                  //instantiate application using express app initializer
 const server = require("http").createServer(app);   //listen for http requests and is passed through the express application
-const pool = require('./db')
+const pool = require('./src/db')
+
+const authRouter = require("./routes/authRouter");
+const searchRouter = require("./routes/searchRouter");
+const createRouter = require("./routes/createRouter");
+
+
+setup.connect()
+const jsonParser = bodyParser.json()
+
 
 require("dotenv").config();
 
@@ -32,20 +44,6 @@ app.get("/", (req, res) => {
     res.json("server is running...");
 });
 
-app.get('/users', (req, res) => {
-	(async () => {
-		const client = await pool.connect()
-		try {
-			const result = await client.query('SELECT * FROM users')
-			res.send(result.rows)
-		} catch (err) {
-			console.log(err.stack)
-		} finally {
-			client.release()
-		}
-	})()
-})
-
 //Session
 app.use(
     session({
@@ -64,16 +62,13 @@ app.use(
   );
 
 app.use("/auth", authRouter);
-
-app.post('/test', function (req, res) {
-	console.log("connected");
-	res.redirect("/test");
-})
+app.use("/search", searchRouter);
+app.use("/create", createRouter);
 
 //socket recieves a connection and runs the callback
 io.on("connect", socket => {});
 
 //listening on port 5000
-server.listen(5000, () => {
+server.listen(8080, () => {
     console.log("Server listening on port 5000")
 });
