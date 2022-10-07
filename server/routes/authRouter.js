@@ -42,6 +42,7 @@ router
 				id: result.rows[0].id,
 			};
 			res.json({ loggedIn: true, username: username });
+			console.log(req.session);
 		} else {
 			res.statusCode = 403
 			res.json({ loggedIn: false, status: "Wrong username or password!" });

@@ -1,6 +1,11 @@
 import { useState, useContext } from "react";
 import * as Yup from "yup";
 import {
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+import {
   Flex,
   Heading,
   Input,
@@ -27,7 +32,7 @@ const CFaEmail = chakra(FaEnvelope);
 
 const Login = () => {
   //const [ setUser ] = useContext(AccountContext);
-  
+  const [shouldRedirect, setRedirect] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -68,6 +73,10 @@ const Login = () => {
             //} else if (data.loggedIn) {
               //navigate("/home");
             //}
+          if (data.loggedIn)
+          {
+            setRedirect(true);
+          }
           console.log(data);
         });
     }}
@@ -154,6 +163,7 @@ const Login = () => {
                 width="full"
               >
                 Login
+                {shouldRedirect && <Navigate replace to="/user" />}
               </Button>
             </VStack>
           </form>
