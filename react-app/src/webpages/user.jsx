@@ -14,7 +14,9 @@ class User extends React.Component {
         usersInfo: [],
         searchTerm: "",
         value: "",
-        session: []
+        session: [],
+        openRequests: [],
+        friends: []
     }
     
  
@@ -61,6 +63,40 @@ class User extends React.Component {
         })
         console.log("sent a request to", userid);
         console.log("From", this.state.session.id);
+    }
+
+    getOpenRequests = () => {
+        fetch("http://localhost:5000/search/friendRequests", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({userId: this.state.session.id}),
+        })
+        .catch(err => {
+            return;
+        })
+        .then(data => {
+            this.setState({ openRequests: data })
+        });
+    }
+
+    getCurrentFriends = () => {
+        fetch("http://localhost:5000/search/friendRequests", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({userId: this.state.session.id}),
+        })
+        .catch(err => {
+            return;
+        })
+        .then(data => {
+            this.setState({ friends: data })
+        });
     }
 
     render() {
