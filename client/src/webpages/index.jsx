@@ -11,8 +11,7 @@ const Webpages = () => {
     return(
         <Router>
             <Routes>
-                <Route exact path="/" element = {<Home />} />
-                <Route path = "/user" element = {<User />} />
+                <Route exact path="/" element = {<User />} />
             </Routes>
         </Router>
     );
