@@ -13,7 +13,7 @@ router
   	.get("/login", async (req, res) => {
     	console.log(req.session);
       	if (req.session.user && req.session.user.username) {
-          	res.json({ loggedIn: true, username: req.session.user.username });
+          	res.json({ loggedIn: true, userId: req.session.user.id });
       	} else {
           	res.json({ loggedIn: false});
       	}
@@ -40,7 +40,7 @@ router
 				username: req.body.username,
 				id: result.rows[0].id,
 			};
-			res.json({ loggedIn: true, username: username });
+			res.json({ loggedIn: true, username: username, userId: result.rows[0].id });
 		} else {
 			res.statusCode = 403
 			res.json({ loggedIn: false, status: "Wrong username or password!" });
