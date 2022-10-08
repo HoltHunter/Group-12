@@ -59,10 +59,10 @@ class User extends React.Component {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({fromId: this.state.session.id, toId: userid}),
+        body: JSON.stringify({fromId: this.state.session.userId, toId: userid}),
         })
         console.log("sent a request to", userid);
-        console.log("From", this.state.session.id);
+        console.log("From", this.state.session.userId);
     }
 
     getOpenRequests = () => {
@@ -117,7 +117,7 @@ class User extends React.Component {
 
                                 <ListGroup.Item>
                                     <h5>{listValue.first_name}</h5>
-                                    <Button variant="outline-success" onClick={(e) => this.sendRequest(listValue.first_name, e)}>Send Friend Request</Button>
+                                    <Button variant="outline-success" onClick={(e) => this.sendRequest(listValue.id, e)}>Send Friend Request</Button>
                                 </ListGroup.Item>
 
                         </ListGroup>
