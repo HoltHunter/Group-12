@@ -35,7 +35,7 @@ const io = new Server(server, {
 
 app.use(helmet());
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3001",
     credentials: true,
 }))
 app.use(express.json()); //parses JSON via express server, utilize as JS object
@@ -69,6 +69,6 @@ app.use("/create", createRouter);
 io.on("connect", socket => {});
 
 //listening on port 5000
-server.listen(5000, () => {
-    console.log("Server listening on port 5000")
+server.listen(8081, () => {
+    console.log("Server listening on port 8081")
 });

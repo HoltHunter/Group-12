@@ -31,7 +31,7 @@ router
 			const to_id = req.body.toId
 			const result = await client.query(`
 				INSERT INTO friend_requests (user_id, request_from_id) 
-				VALUES('${from_id}', '${to_id}');
+				VALUES('${to_id}', '${from_id}');
 			`)
 			res.send("Success")
 		} catch (err) {
