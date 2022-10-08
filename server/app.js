@@ -69,6 +69,6 @@ app.use("/create", createRouter);
 io.on("connect", socket => {});
 
 //listening on port 5000
-server.listen(8080, () => {
-    console.log("Server listening on port 8080")
+server.listen(5000, () => {
+    console.log("Server listening on port 5000")
 });

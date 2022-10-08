@@ -75,6 +75,7 @@ const Login = () => {
             //}
           if (data.loggedIn)
           {
+            this.props.getSession(data);
             setRedirect(true);
           }
           console.log(data);

@@ -6,30 +6,26 @@ import Select from 'react-select';
 import reactSelect from 'react-select';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-
+//import Session from './session';
 
 
 class User extends React.Component {
 
-    constructor(props) {
-        super(props)
-        //this.state.session = props.session;
-    }
 
     state = {
         usersInfo: [],
         searchTerm: "",
         value: "",
-        //session: [],
+        session: [],
         openRequests: [],
         friends: []
     }
-
+    
  
     componentDidMount = () => {
-        //this.getSession();
+        this.getSession();
         this.getUsers();
-       // this.getOpenRequests();
+        this.getOpenRequests();
     }
 
     getUsers = () => {
@@ -118,7 +114,7 @@ class User extends React.Component {
     render() {
          return(
              <div>
-                <h1>Hi {this.props.session}</h1>
+                <h1>Hi {this.state.session.username}</h1>
                 <input type="text" placeholder="Search..." onChange={event => {this.setState({searchTerm: event.target.value})}}/>
                 {this.state.usersInfo.filter((val)=> {
                     if (this.state.searchTerm == "") {
