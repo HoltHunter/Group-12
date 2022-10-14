@@ -8,9 +8,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //Custom React folder to handle CSS styles
 class App extends React.Component {
 
-//   state = {
-//     session: []
-//   }
+  	state = {
+		session: null
+  	}
+
+  	setSession = (session) => {
+		console.log("Session data: ", session)
+		this.setState({ session: session })
+  	}
 
 //   getSession = (sessionData) => {
 //     this.setState({ session: sessionData })
@@ -24,16 +29,24 @@ class App extends React.Component {
     }) */
 //   }
 
-  render() {
-    return (
-      <div>
-         <Routes>
-          <Route path='/user' element={<User />} />
-          <Route path='/' element={<Login />} />
-        </Routes>
-      </div>
-    );
-  }
+  	render() {
+    	return (
+      		<div>
+         		<Routes>
+          			<Route path='/user' 
+						element={<User 
+							session={ this.state.session }
+						/>} 
+					/>
+          			<Route path='/' 
+						element={<Login 
+							setSession={ this.setSession } 
+							/>} 
+					/>
+        		</Routes>
+      		</div>
+    	);
+  	}
 }
 
 export default App;

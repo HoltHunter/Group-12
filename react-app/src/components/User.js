@@ -15,15 +15,13 @@ class User extends React.Component {
         usersInfo: [],
         searchTerm: "",
         value: "",
-        session: null,
         openRequests: [],
         friends: []
     }
     
     componentDidMount = () => {
-        this.getSession();
         this.getUsers();
-        // this.getOpenRequests();
+        this.getOpenRequests();
     }
 
     getUsers = () => {
@@ -35,19 +33,6 @@ class User extends React.Component {
                 console.log('User list NOT found');
             })
     }
-
-     getSession = () => {
-        axios.get(`${baseUrl}/auth/login`, { withCredentials: true })
-            .then(response => {
-                this.setState({session: response.data});
-                this.getOpenRequests()
-            })
-            .catch(() => {
-                console.log('Session NOT gotten');
-            })
-
-    } 
-
 
     sendRequest = (userid, e) => {
         e.preventDefault();
@@ -70,16 +55,16 @@ class User extends React.Component {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({fromId: this.state.session.userId, toId: userid}),
+                body: JSON.stringify({fromId: this.props.session.userId, toId: userid}),
             })
         }
         
         console.log("sent a request to", userid);
-        console.log("From", this.state.session.userId);
+        console.log("From", this.props.session.userId);
     }
 
     getOpenRequests = () => {
-        const reqBody = JSON.stringify({userId: this.state.session.userId})
+        const reqBody = JSON.stringify({userId: this.props.session.userId})
         axios.post(baseUrl + `/search/friendRequests`, reqBody, { 
             withCredentials: true,
             headers: {"Content-Type": "application/json",}
@@ -92,7 +77,7 @@ class User extends React.Component {
                 console.log('User list NOT found');
             })
 
-        //console.log(JSON.stringify({userId: this.state.session.userId}), this.state.openRequests);
+        console.log(JSON.stringify({userId: this.props.session.userId}), this.state.openRequests);
     }
 
     getCurrentFriends = () => {
@@ -102,7 +87,7 @@ class User extends React.Component {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({userId: this.state.session.userId}),
+        body: JSON.stringify({userId: this.props.session.userId}),
         })
         .catch(err => {
             return;
@@ -131,10 +116,10 @@ class User extends React.Component {
     }
 
     render() {
-        if (this.state.session) {
+        if (this.props.session) {
             return(
                 <div>
-                   <h1>Hi {this.state.session.username}</h1>
+                   <h1>Hi {this.props.session.username}</h1>
                    <input type="text" placeholder="Search..." onChange={event => {this.setState({searchTerm: event.target.value})}}/>
                    {this.state.usersInfo.filter((val)=> {
                        if (this.state.searchTerm == "") {

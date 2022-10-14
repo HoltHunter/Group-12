@@ -15,7 +15,8 @@ import {
   FormControl,
   FormErrorMessage,
   InputRightElement,
-  Checkbox
+  Checkbox,
+  propNames
 } from "@chakra-ui/react";
 // import { FaUserAlt, FaEnvelope, FaLock } from "react-icons/fa";
 import { useFormik } from "formik";
@@ -28,7 +29,7 @@ import { useFormik } from "formik";
 
 const baseUrl = "http://localhost:8081"
 
-const Login = ({ getSession }) => {
+const Login = ({ setSession }) => {
 	//const [ setUser ] = useContext(AccountContext);
 	const [shouldRedirect, setRedirect] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
@@ -69,12 +70,24 @@ const Login = ({ getSession }) => {
 				//navigate("/home");
 				//}
           		if (data.loggedIn) {
-					// getSession(data);
+					setSession(data)
 					setRedirect(true);
 				}
 			});
     	}}
   	)	
+
+	// getSession = () => {
+    //     axios.get(`${baseUrl}/auth/login`, { withCredentials: true })
+    //         .then(response => {
+    //             this.setState({session: response.data});
+    //             this.getOpenRequests()
+    //         })
+    //         .catch(() => {
+    //             console.log('Session NOT gotten');
+    //         })
+
+    // } 
 
   	return (
     <Flex
