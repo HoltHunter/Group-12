@@ -50,7 +50,7 @@ router
 				SET decision = ${decision}
 				WHERE id = ${request_id};
 			`)
-			if (decision === 'true') {
+			if (decision == true) {
 				let result = await client.query(`SELECT * FROM friend_requests WHERE id = ${request_id}`)
 				result.rows[0].user_id < result.rows[0].request_from_id 
 					? result = [result.rows[0].user_id, result.rows[0].request_from_id]
