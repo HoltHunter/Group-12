@@ -77,18 +77,6 @@ const Login = ({ setSession }) => {
     	}}
   	)	
 
-	// getSession = () => {
-    //     axios.get(`${baseUrl}/auth/login`, { withCredentials: true })
-    //         .then(response => {
-    //             this.setState({session: response.data});
-    //             this.getOpenRequests()
-    //         })
-    //         .catch(() => {
-    //             console.log('Session NOT gotten');
-    //         })
-
-    // } 
-
   	return (
     <Flex
 		flexDirection="column"

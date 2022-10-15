@@ -1,13 +1,14 @@
-// import { Text } from "@chakra-ui/layout";
 import { Route, Routes } from "react-router-dom";
 import React from "react";
 import Login from "./components/Login";
-import User from "./components/User";
 import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
-//Custom React folder to handle CSS styles
-class App extends React.Component {
+import 'bootstrap/dist/css/bootstrap.min.css'; //Custom React folder to handle CSS styles
+import SearchView from "./components/SearchView";
+import Header from "./components/Header";
+import Profile from "./components/Profile";
+import HomeFeed from "./components/HomeFeed";
 
+class App extends React.Component {
   	state = {
 		session: null
   	}
@@ -17,31 +18,22 @@ class App extends React.Component {
 		this.setState({ session: session })
   	}
 
-//   getSession = (sessionData) => {
-//     this.setState({ session: sessionData })
-/*     axios.get('/auth/login')
-    .then(response => {
-        this.setState({session: response.data});
-        console.log(this.state.session);
-    })
-    .catch(() => {
-        alert('User list NOT found');
-    }) */
-//   }
-
   	render() {
     	return (
       		<div>
+				{ this.state.session && <Header />}
          		<Routes>
-          			<Route path='/user' 
-						element={<User 
-							session={ this.state.session }
-						/>} 
+				 	<Route path='/' 
+						element={<Login setSession={ this.setSession } />} 
 					/>
-          			<Route path='/' 
-						element={<Login 
-							setSession={ this.setSession } 
-							/>} 
+          			<Route path='/home' 
+						element={<HomeFeed session={ this.state.session } />} 
+					/>
+					<Route path='/search' 
+						element={<SearchView session={ this.state.session } />} 
+					/>
+					<Route path='/profile' 
+						element={<Profile session={ this.state.session } />} 
 					/>
         		</Routes>
       		</div>

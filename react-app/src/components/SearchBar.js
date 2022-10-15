@@ -9,8 +9,8 @@ class SearchBar extends React.Component {
 
     sendRequest = (userId, friendRequestId, e) => {
         e.preventDefault();
-        
-        if (friendRequestId !== undefined) {
+
+        if (friendRequestId !== undefined && friendRequestId !== null) {
             const reqBody = JSON.stringify({request_id: friendRequestId, decision: true})
             axios.post('/create/acceptFriendRequest', reqBody, {
                 withCredentials: true,
@@ -30,14 +30,15 @@ class SearchBar extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="ui container">
                 <input type="text" placeholder="Search..." onChange={event => {this.setState({searchTerm: event.target.value})}}/>
-                <div className="ui divided list">
+                <div className="ui relaxed divided list">
                     {this.props.searchableData.filter((user)=> {
                         if (this.state.searchTerm == "") {
                             return ""
                         }
-                        if (user.first_name.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
+                        if (user.first_name.toLowerCase().includes(this.state.searchTerm.toLowerCase()) 
+                            || user.last_name.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
                             return user
                         }
                     }).map(( user ) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from '../apis/coreApp'
 import SearchBar from './SearchBar'
 
-class User extends React.Component {
+class SearchView extends React.Component {
     state = {
         usersInfo: []
     }
@@ -40,4 +40,4 @@ class User extends React.Component {
          
     }
 }
-export default User;
+export default SearchView;
