@@ -37,8 +37,8 @@ const Login = ({ setSession }) => {
 
 	const formik = useFormik({
 		initialValues: { 
-			username: "steve@rogers.com", 
-			password: "captainamerica" 
+			username: "", 
+			password: "" 
 		},
 		validationSchema: Yup.object({
 		username: Yup.string().required("Email required!"),
