@@ -36,7 +36,10 @@ const Login = ({ setSession }) => {
 	const handleShowClick = () => setShowPassword(!showPassword);
 
 	const formik = useFormik({
-		initialValues: { username: "", password: "" },
+		initialValues: { 
+			username: "steve@rogers.com", 
+			password: "captainamerica" 
+		},
 		validationSchema: Yup.object({
 		username: Yup.string().required("Email required!"),
 		password: Yup.string().required("Password required!"),
@@ -160,7 +163,7 @@ const Login = ({ setSession }) => {
 						width="full"
 					>
 					Login
-					{shouldRedirect && <Navigate replace to="/user" />}
+					{shouldRedirect && <Navigate replace to="/home" />}
 					</Button>
 					</VStack>
 				</form>
