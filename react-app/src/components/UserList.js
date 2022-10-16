@@ -1,7 +1,7 @@
 import React from "react";
 import UserCard from './UserCard'
 
-const UserSearchList = ({ data, sendRequest }) => {
+const UserList = ({ data, sendRequest }) => {
     return (
         <div className="ui relaxed divided list">
             { 
@@ -20,4 +20,4 @@ const UserSearchList = ({ data, sendRequest }) => {
     )
 }
 
-export default UserSearchList
+export default UserList

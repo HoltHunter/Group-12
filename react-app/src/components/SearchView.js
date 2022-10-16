@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from '../apis/coreApp'
 import SearchBar from './SearchBar'
-import UserSearchList from './UserSearchList';
+import UserList from './UserList';
 
 class SearchView extends React.Component {
     state = {
@@ -67,7 +67,7 @@ class SearchView extends React.Component {
                     <SearchBar 
                         onFormSubmit={ this.onFormSubmit }
                     />
-                    <UserSearchList 
+                    <UserList 
                         data={ this.filterData(this.state.searchTerm) } 
                         onRequest={ this.sendRequest }
                     />

@@ -1,6 +1,10 @@
 import React from "react";
 import IconButton from "./IconButton";
 
+// TODO: 
+// * Need to ensure that Name is clickable and navigates to Profile.
+// * We should consider removing the send/accept friend request button to the Profile ONLY.
+
 const UserCard = ({ user, onRequest }) => {
     const renderButton = () => {
         if (user.is_friend) {
