@@ -19,7 +19,11 @@ class SearchBar extends React.Component {
             clearTimeout(timeoutId)
         }
     }
-    
+
+    // NOTE: Technically, there is a bug here, because hitting the Enter key
+    // will trigger onFormSubmit. The onChange event will fire ~500ms later.
+    // The result is the same - no change in state - so it shouldn't affect
+    // the UX, but technically this is a bug.
     onFormSubmit = (event) => {
         event.preventDefault()
 
