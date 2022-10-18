@@ -11,4 +11,3 @@ module.exports = `
             foreign key (request_from_id) REFERENCES users (id)
     );
 `
-

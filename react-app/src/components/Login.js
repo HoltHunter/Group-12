@@ -15,7 +15,8 @@ import {
   FormControl,
   FormErrorMessage,
   InputRightElement,
-  Checkbox
+  Checkbox,
+  propNames
 } from "@chakra-ui/react";
 // import { FaUserAlt, FaEnvelope, FaLock } from "react-icons/fa";
 import { useFormik } from "formik";
@@ -28,14 +29,17 @@ import { useFormik } from "formik";
 
 const baseUrl = "http://localhost:8081"
 
-const Login = ({ getSession }) => {
+const Login = ({ setSession }) => {
 	//const [ setUser ] = useContext(AccountContext);
 	const [shouldRedirect, setRedirect] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
 	const handleShowClick = () => setShowPassword(!showPassword);
 
 	const formik = useFormik({
-		initialValues: { username: "", password: "" },
+		initialValues: { 
+			username: "", 
+			password: "" 
+		},
 		validationSchema: Yup.object({
 		username: Yup.string().required("Email required!"),
 		password: Yup.string().required("Password required!"),
@@ -69,7 +73,7 @@ const Login = ({ getSession }) => {
 				//navigate("/home");
 				//}
           		if (data.loggedIn) {
-					// getSession(data);
+					setSession(data)
 					setRedirect(true);
 				}
 			});
@@ -159,7 +163,7 @@ const Login = ({ getSession }) => {
 						width="full"
 					>
 					Login
-					{shouldRedirect && <Navigate replace to="/user" />}
+					{shouldRedirect && <Navigate replace to="/home" />}
 					</Button>
 					</VStack>
 				</form>
