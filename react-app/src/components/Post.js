@@ -1,6 +1,7 @@
 import React from "react";
 import IconButton from "./IconButton";
-import Comment from "./comment";
+import CommentList from "./commentList";
+import { useState } from "react";
 
 // Can model this component on UserCard, to start.
 
@@ -13,47 +14,33 @@ import Comment from "./comment";
 // 6. Share button 
 // 7. User icon / profile pic. Can use a placeholder for now, like UserCard does.
 // 8. User name is a link to user Profile.
-const testComments = [
-    {
-        "user_id":'1',
-        "post_id": '1',
-        "date_created": '2022-10-26 18:36:10.98',
-        "content": 'Awesome post!!'
-    },
-    {
-        "user_id":'2',
-        "post_id": '1',
-        "date_created": '2022-10-26 18:36:10.98',
-        "content": 'Eh, I\'ve seen better...'
-    },
-    {
-        "user_id":'1',
-        "post_id": '1',
-        "date_created": '2022-10-26 18:36:10.98',
-        "content": 'Hello world.'
-    },
-]
+
 
 
 const Post = ({post}) => {
+
+    const [showComments, setShowComments] = useState(false);
+
+    const revealComments = (e) => {
+        e.preventDefault();
+        setShowComments(current => !current);
+    }
+
     return (
         <div className="">
-            <h6>On {post.date_created}, userID {post.user_id} posted:</h6>
+            <h6>On {post.date_created}, {post.username} posted:</h6>
             <p>{post.content}</p>
             <IconButton 
                 iconName="heart"
                 label={post.likes_count}
                 onClick=""
             />
-            {testComments.map((comment) => {
-                    return (
-                        <div key={ comment.id } className="item">
-                            <Comment 
-                                comment={ comment } 
-                            />
-                        </div>
-                    )
-                })}
+            <IconButton
+                iconName="comment"
+                label={ showComments ? "Hide Comments" : "Show Comments"}
+                onClick={(e) => revealComments(e)}
+            />
+            {showComments && <CommentList/>}
         </div>
             
     )

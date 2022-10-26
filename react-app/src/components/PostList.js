@@ -13,6 +13,7 @@ const testPosts = [
         "date_created": '2022-10-26 15:39:10.00',
         "date_modified": '',
         "user_id": '1',
+        "username": 'landonhh99@gmail.com',
         "content": 'Hello world. This is my post. Please like!',
         "likes_count": '22'
     },
@@ -21,6 +22,7 @@ const testPosts = [
         "date_created": '2022-10-27 15:39:10.00',
         "date_modified": '',
         "user_id": '2',
+        "username": 'test@test.com',
         "content": 'Hi! like my post instead.',
         "likes_count": '22'
     },
@@ -29,6 +31,7 @@ const testPosts = [
         "date_created": '2022-10-28 15:39:10.00',
         "date_modified": '',
         "user_id": '1',
+        "username": 'landonhh99@gmail.com',
         "content": 'I\'m just posting because I am bored.',
         "likes_count": '22'
     }
