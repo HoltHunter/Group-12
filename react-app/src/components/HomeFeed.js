@@ -6,6 +6,7 @@ class HomeFeed extends React.Component {
         return (
             <div>
                 Home
+                <h4>Hi {this.props.session.username}</h4>
                 <PostList />
             </div>
         )

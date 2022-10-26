@@ -35,7 +35,7 @@ const io = new Server(server, {
 
 app.use(helmet());
 app.use(cors({
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",  
     credentials: true,
 }))
 app.use(express.json()); //parses JSON via express server, utilize as JS object
