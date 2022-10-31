@@ -1,4 +1,7 @@
 import React from "react";
+import IconButton from "./IconButton";
+import CommentList from "./commentList";
+import { useState } from "react";
 
 // Can model this component on UserCard, to start.
 
@@ -12,11 +15,34 @@ import React from "react";
 // 7. User icon / profile pic. Can use a placeholder for now, like UserCard does.
 // 8. User name is a link to user Profile.
 
-const Post = () => {
+
+
+const Post = ({post}) => {
+
+    const [showComments, setShowComments] = useState(false);
+
+    const revealComments = (e) => {
+        e.preventDefault();
+        setShowComments(current => !current);
+    }
+
     return (
-        <div>
-            Post
+        <div className="">
+            <h6>On {post.date_created}, {post.username} posted:</h6>
+            <p>{post.content}</p>
+            <IconButton 
+                iconName="heart"
+                label={post.likes_count}
+                onClick=""
+            />
+            <IconButton
+                iconName="comment"
+                label={ showComments ? "Hide Comments" : "Show Comments"}
+                onClick={(e) => revealComments(e)}
+            />
+            {showComments && <CommentList/>}
         </div>
+            
     )
 }
 
