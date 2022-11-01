@@ -63,5 +63,42 @@ router
                 client.release()
             }
     })
+    // Do not want to request posts from who requested the posts
+    // Only retrieving posts from someone who are friends
+    // Limit the result to 10 rows/posts (pagination)
+    // Check to see if :id is a URL parameter
+    .post('/posts/:id', async (req, res) => {
+        const client = await pool.connect()
+        try {
+            const userId = req.body.userId
+            // Pull id URL parameter
+            let {id} = req.params
+            // Parse from String to Int
+            parseInt("id")
+            let result = null
+            if (id != userId) {
+                result = await client.query(`
+                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
+                FROM posts p
+                WHERE p.user_id != ${ userId }
+                ORDER BY p.date_created desc
+                LIMIT 10;
+            `)
+            } else {
+                result = await client.query(`
+                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
+                FROM posts p
+                WHERE p.user_id = ${ userId }
+                ORDER BY p.date_created desc
+                LIMIT 10;
+            `)
+            }
+            res.send(result.rows)
+        } catch (err) {
+            console.log(err.stack)
+        } finally {
+            client.release()
+        }
+    })
 
 module.exports = router;

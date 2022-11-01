@@ -67,5 +67,21 @@ router
 			client.release()
 		}
     })
+	.post('/newPost', async (req, res) => {
+		const client = await pool.connect()
+		try {
+			const user_id = req.body.userId
+			const post_content = req.body.postContent
+			const result = await client.query(`
+			INSERT INTO posts (user_id,content,likes_count)
+				VALUES(${user_id},'${post_content}',0);
+			`)
+			res.send("Success")
+		} catch (err) {
+			console.log(err.stack)
+		} finally {
+			client.release()
+		}
+    })
 
 module.exports = router;
