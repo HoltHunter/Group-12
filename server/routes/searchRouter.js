@@ -63,24 +63,23 @@ router
                 client.release()
             }
     })
-    // Do not want to request posts from who requested the posts
-    // Only retrieving posts from someone who are friends
+    // Individual profile posts
+    // Do not want to request posts from who requested the posts,
+    //      unless specified (home page)
     // Limit the result to 10 rows/posts (pagination)
     // Check to see if :id is a URL parameter
     .post('/posts/:id', async (req, res) => {
         const client = await pool.connect()
         try {
             const userId = req.body.userId
-            // Pull id URL parameter
-            let {id} = req.params
-            // Parse from String to Int
-            parseInt("id")
+            let {id} = req.params   // Pull id URL parameter
+            parseInt("id")          // Parse from String to Int
             let result = null
             if (id != userId) {
                 result = await client.query(`
                 SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
                 FROM posts p
-                WHERE p.user_id != ${ userId }
+                WHERE p.user_id = ${ id }
                 ORDER BY p.date_created desc
                 LIMIT 10;
             `)
@@ -88,11 +87,29 @@ router
                 result = await client.query(`
                 SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
                 FROM posts p
-                WHERE p.user_id = ${ userId }
+                WHERE p.user_id = ${ id }
                 ORDER BY p.date_created desc
                 LIMIT 10;
             `)
             }
+            res.send(result.rows)
+        } catch (err) {
+            console.log(err.stack)
+        } finally {
+            client.release()
+        }
+    })
+    // Retrieving all posts from self and friends
+    .post('/posts', async (req, res) => {
+        const client = await pool.connect()
+        try {
+            const userId = req.body.userId
+            const result = await client.query(`
+                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
+                FROM posts p
+                ORDER BY p.date_created desc
+                LIMIT 10;
+            `)
             res.send(result.rows)
         } catch (err) {
             console.log(err.stack)
