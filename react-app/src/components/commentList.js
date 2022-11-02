@@ -25,11 +25,11 @@ const testComments = [
   },
 ]
 
-const CommentList = () => {
+const CommentList = ( {comments} ) => {
   return (
     <div>
       {
-        testComments.map((comment) => {
+        comments.map((comment) => {
         return (
             <div key={ comment.id } className="item">
                 <Comment 

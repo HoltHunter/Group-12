@@ -2,6 +2,8 @@ import React from "react";
 import IconButton from "./IconButton";
 import CommentList from "./commentList";
 import { useState } from "react";
+import axios from '../apis/coreApp';
+
 
 // Can model this component on UserCard, to start.
 
@@ -20,9 +22,23 @@ import { useState } from "react";
 const Post = ({post}) => {
 
     const [showComments, setShowComments] = useState(false);
+    const [postComments, setComments] = useState([]);
+
+    const getComments = async () => {
+        const reqBody = ""
+        const url = "/search/posts/" + post.user_id + "/comments/" + post.id
+        const response = await axios.post(url, "", {
+            withCredentials: true,
+            headers: {"Content-Type": "application/json",}
+        })
+        setComments(response.data)
+    }
 
     const revealComments = (e) => {
         e.preventDefault();
+        if (!showComments) {
+            getComments();
+        }
         setShowComments(current => !current);
     }
 
@@ -40,7 +56,9 @@ const Post = ({post}) => {
                 label={ showComments ? "Hide Comments" : "Show Comments"}
                 onClick={(e) => revealComments(e)}
             />
-            {showComments && <CommentList/>}
+            {showComments && <CommentList
+            comments={postComments}
+            />}
         </div>
             
     )
