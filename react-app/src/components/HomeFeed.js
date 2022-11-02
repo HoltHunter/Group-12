@@ -27,6 +27,7 @@ class HomeFeed extends React.Component {
                 Home
                 <h4>Hi {this.props.session.username}</h4>
                 <PostList 
+                    session={this.props.session}
                     posts={this.state.userPosts}
                 />
             </div>

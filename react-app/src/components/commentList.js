@@ -1,5 +1,6 @@
 import React from "react";
 import Comment from "./comment";
+import CreateComment from "./CreateComment"
 
 const testComments = [
   {
@@ -25,15 +26,19 @@ const testComments = [
   },
 ]
 
-const CommentList = () => {
+const CommentList = ( {comments, postId, session} ) => {
   return (
     <div>
+      <CreateComment
+        session={ session }
+        postId={ postId }
+      />
       {
-        testComments.map((comment) => {
+        comments.map((comment) => {
         return (
             <div key={ comment.id } className="item">
                 <Comment 
-                    comment={ comment } 
+                  comment={ comment } 
                 />
             </div>
         )

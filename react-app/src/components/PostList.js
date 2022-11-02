@@ -38,7 +38,7 @@ const testPosts = [
 ]
 
 
-const PostList = ( {posts} ) => {
+const PostList = ( {posts, session} ) => {
     return (
         <div>
         <h4>Timeline:</h4>
@@ -48,6 +48,7 @@ const PostList = ( {posts} ) => {
                     return (
                         <div key={ post.id } className="item">
                             <Post 
+                                session={session}
                                 post={ post } 
                             />
                         </div>
