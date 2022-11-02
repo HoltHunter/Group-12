@@ -8,7 +8,7 @@ const Comment = ({comment}) => {
 
   return (
     <div>
-      <h6>{comment.user_id}</h6>
+      <h5>{comment.first_name} {comment.last_name}</h5>
       <p>{comment.content}</p>
     </div>
   )

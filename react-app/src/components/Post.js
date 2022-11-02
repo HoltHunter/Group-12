@@ -19,7 +19,7 @@ import axios from '../apis/coreApp';
 
 
 
-const Post = ({post}) => {
+const Post = ({post, session}) => {
 
     const [showComments, setShowComments] = useState(false);
     const [postComments, setComments] = useState([]);
@@ -27,7 +27,7 @@ const Post = ({post}) => {
     const getComments = async () => {
         const reqBody = ""
         const url = "/search/posts/" + post.user_id + "/comments/" + post.id
-        const response = await axios.post(url, "", {
+        const response = await axios.post(url, {
             withCredentials: true,
             headers: {"Content-Type": "application/json",}
         })
@@ -44,7 +44,7 @@ const Post = ({post}) => {
 
     return (
         <div className="">
-            <h6>On {post.date_created}, {post.username} posted:</h6>
+            <h6>On {post.date_created}, {post.first_name} {post.last_name} posted:</h6>
             <p>{post.content}</p>
             <IconButton 
                 iconName="heart"
@@ -57,7 +57,9 @@ const Post = ({post}) => {
                 onClick={(e) => revealComments(e)}
             />
             {showComments && <CommentList
+            session={session}
             comments={postComments}
+            postId={post.id}
             />}
         </div>
             
