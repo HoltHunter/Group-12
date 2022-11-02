@@ -71,8 +71,9 @@ router
             const userId = req.body.userId
             let { id } = req.params   // Pull id from URL parameter
             const result = await client.query(`
-                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
+                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name
                 FROM posts p
+                JOIN users u ON p.user_id = u.id
                 WHERE p.user_id = ${ id }
                 ORDER BY p.date_created desc
                 LIMIT 10;
@@ -90,8 +91,9 @@ router
             // const userId = req.body.userId
             let { postId } = req.params   // Pull id from URL parameter
             const result = await client.query(`
-                SELECT p.post_id, p.user_id, p.date_created, p.content
+                SELECT p.post_id, p.user_id, p.date_created, p.content, u.first_name, u.last_name
                 FROM post_comments p
+                JOIN users u ON p.user_id = u.id
                 WHERE p.post_id = ${ postId }
                 ORDER BY p.date_created desc
                 ;
@@ -119,8 +121,9 @@ router
             console.log(friends.rows)
             console.log("'" + friends.rows.map(value => value.user_id === userId ? value.other_user_id : value.user_id ).join("','") + "'")
             const result = await client.query(`
-                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
+                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name
                 FROM posts p
+                JOIN users u ON p.user_id = u.id
                 WHERE p.user_id != ${ userId }
                 AND p.user_id IN (${"'" + friends.rows.map(value => value.user_id === userId ? value.other_user_id : value.user_id ).join("','") + "'"})
                 ORDER BY p.date_created DESC
