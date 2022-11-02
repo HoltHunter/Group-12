@@ -1,7 +1,7 @@
 import React from "react";
 import UserCard from './UserCard'
 
-const UserList = ({ data, sendRequest }) => {
+const UserList = ({ data, onRequest }) => {
     return (
         <div className="ui relaxed divided list">
             { 
@@ -10,7 +10,7 @@ const UserList = ({ data, sendRequest }) => {
                         <div key={ user.id } className="item">
                             <UserCard 
                                 user={ user } 
-                                onRequest={ sendRequest }
+                                onRequest={ onRequest }
                             />
                         </div>
                     )
