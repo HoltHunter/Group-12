@@ -63,35 +63,20 @@ router
                 client.release()
             }
     })
+
     // Individual profile posts
-    // Do not want to request posts from who requested the posts,
-    //      unless specified (home page)
-    // Limit the result to 10 rows/posts (pagination)
-    // Check to see if :id is a URL parameter
     .post('/posts/:id', async (req, res) => {
         const client = await pool.connect()
         try {
             const userId = req.body.userId
-            let {id} = req.params   // Pull id URL parameter
-            parseInt("id")          // Parse from String to Int
-            let result = null
-            if (id != userId) {
-                result = await client.query(`
+            let { id } = req.params   // Pull id from URL parameter
+            const result = await client.query(`
                 SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
                 FROM posts p
                 WHERE p.user_id = ${ id }
                 ORDER BY p.date_created desc
                 LIMIT 10;
             `)
-            } else {
-                result = await client.query(`
-                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
-                FROM posts p
-                WHERE p.user_id = ${ id }
-                ORDER BY p.date_created desc
-                LIMIT 10;
-            `)
-            }
             res.send(result.rows)
         } catch (err) {
             console.log(err.stack)
@@ -99,15 +84,46 @@ router
             client.release()
         }
     })
-    // Retrieving all posts from self and friends
+    .post('/posts/:id/comments/:postId', async (req, res) => {
+        const client = await pool.connect()
+        try {
+            // const userId = req.body.userId
+            let { postId } = req.params   // Pull id from URL parameter
+            const result = await client.query(`
+                SELECT p.post_id, p.user_id, p.date_created, p.content
+                FROM post_comments p
+                WHERE p.post_id = ${ postId }
+                ORDER BY p.date_created desc
+                ;
+            `)
+            res.send(result.rows)
+        } catch (err) {
+            console.log(err.stack)
+        } finally {
+            client.release()
+        }
+    })
+
+    // Retrieving posts from all friends
     .post('/posts', async (req, res) => {
         const client = await pool.connect()
         try {
             const userId = req.body.userId
+            const friends = await client.query(`
+                SELECT f.user_id, f.other_user_id
+                FROM friends f
+                WHERE f.user_id = ${ userId }
+                OR f.other_user_id = ${ userId }
+                ;
+            `)
+            console.log(friends.rows)
+            console.log("'" + friends.rows.map(value => value.user_id === userId ? value.other_user_id : value.user_id ).join("','") + "'")
             const result = await client.query(`
                 SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count
                 FROM posts p
-                ORDER BY p.date_created desc
+                WHERE p.user_id != ${ userId }
+                AND p.user_id IN (${"'" + friends.rows.map(value => value.user_id === userId ? value.other_user_id : value.user_id ).join("','") + "'"})
+                ORDER BY p.date_created DESC
                 LIMIT 10;
             `)
             res.send(result.rows)

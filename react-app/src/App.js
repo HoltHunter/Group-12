@@ -32,7 +32,7 @@ class App extends React.Component {
 					<Route path='/search' 
 						element={<SearchView session={ this.state.session } />} 
 					/>
-					<Route path='/profile' 
+					<Route path='/profile/:id' 
 						element={<Profile session={ this.state.session } />} 
 					/>
         		</Routes>

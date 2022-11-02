@@ -83,5 +83,22 @@ router
 			client.release()
 		}
     })
+	.post('/post/comment', async (req, res) => {
+		const client = await pool.connect()
+		try {
+			const user_id = req.body.userId
+			const post_id = req.body.postId
+			const comment = req.body.comment
+			const result = await client.query(`
+				INSERT INTO post_comments (user_id, post_id, content)
+				VALUES(${user_id}, ${post_id}, '${comment}');
+			`)
+			res.send("Success")
+		} catch (err) {
+			console.log(err.stack)
+		} finally {
+			client.release()
+		}
+    })
 
 module.exports = router;
