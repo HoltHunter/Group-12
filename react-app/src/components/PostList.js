@@ -38,13 +38,13 @@ const testPosts = [
 ]
 
 
-const PostList = () => {
+const PostList = ( {posts} ) => {
     return (
         <div>
         <h4>Timeline:</h4>
         <div className="ui relaxed divided list">
             { 
-                testPosts.map((post) => {
+                posts.map((post) => {
                     return (
                         <div key={ post.id } className="item">
                             <Post 
