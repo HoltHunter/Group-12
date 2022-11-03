@@ -62,6 +62,17 @@ const Post = ({post, session}) => {
         return postDate.toLocaleString()
     }
 
+    const renderSharedPost = (sharedPost) => {
+        return (
+            <div className="ui card">
+                <div className="content">
+                    <h6>On {sharedPost.date_created}, {sharedPost.first_name} {sharedPost.last_name} posted:</h6>
+                    <p>{sharedPost.content}</p>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="ui centered fluid card">
             <div className="content">
@@ -70,6 +81,7 @@ const Post = ({post, session}) => {
             </div>
             <div className="content">
                 <p>{post.content}</p>
+                { post.shared_post && renderSharedPost(post.shared_post) }
             </div>
             <div class="content">
                 <div>

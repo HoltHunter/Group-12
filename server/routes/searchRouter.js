@@ -72,7 +72,8 @@ router
             let { id } = req.params   // Pull id from URL parameter
             const result = await client.query(`
                 SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, 
-                    CASE WHEN l.user_id IS NOT NULL THEN true ELSE false END as liked
+                    CASE WHEN l.user_id IS NOT NULL THEN true ELSE false END as liked,
+                    p.shared_post_id
                 FROM posts p
                 JOIN users u ON p.user_id = u.id
                 LEFT JOIN post_likes l on l.user_id = ${ userId } and l.post_id = p.id
@@ -80,7 +81,28 @@ router
                 ORDER BY p.date_created desc
                 LIMIT 10;
             `)
-            res.send(result.rows)
+            const sharedPostIds = result.rows.map(post => post.shared_post_id)
+            if (sharedPostIds[0]) {
+                const sharedPosts = await client.query(`
+                    SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name
+                    FROM posts p
+                    JOIN users u ON p.user_id = u.id
+                    WHERE p.id IN (${ sharedPostIds })
+                `)
+                const newResults = []
+                for (const post of result.rows) {
+                    for (const sharedPost of sharedPosts.rows) {
+                        if (post.shared_post_id === sharedPost.id) {
+                            post.shared_post = sharedPost
+                        }
+                    }
+                    newResults.push(post)
+                }
+                res.send(newResults)
+            } else {
+                res.send(result.rows)
+            }
+            
         } catch (err) {
             console.log(err.stack)
         } finally {
@@ -120,11 +142,10 @@ router
                 OR f.other_user_id = ${ userId }
                 ;
             `)
-            console.log(friends.rows)
-            console.log("'" + friends.rows.map(value => value.user_id === userId ? value.other_user_id : value.user_id ).join("','") + "'")
             const result = await client.query(`
                 SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, 
-                CASE WHEN l.user_id IS NOT NULL THEN true ELSE false END as liked
+                    CASE WHEN l.user_id IS NOT NULL THEN true ELSE false END as liked,
+                    p.shared_post_id
                 FROM posts p
                 JOIN users u ON p.user_id = u.id
                 LEFT JOIN post_likes l on l.user_id = ${ userId } and l.post_id = p.id
@@ -133,7 +154,27 @@ router
                 ORDER BY p.date_created DESC
                 LIMIT 10;
             `)
-            res.send(result.rows)
+            const sharedPostIds = result.rows.map(post => post.shared_post_id)
+            if (sharedPostIds[0]) {
+                const sharedPosts = await client.query(`
+                    SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name
+                    FROM posts p
+                    JOIN users u ON p.user_id = u.id
+                    WHERE p.id IN (${ sharedPostIds })
+                `)
+                const newResults = []
+                for (const post of result.rows) {
+                    for (const sharedPost of sharedPosts.rows) {
+                        if (post.shared_post_id === sharedPost.id) {
+                            post.shared_post = sharedPost
+                        }
+                    }
+                    newResults.push(post)
+                }
+                res.send(newResults)
+            } else {
+                res.send(result.rows)
+            }
         } catch (err) {
             console.log(err.stack)
         } finally {
