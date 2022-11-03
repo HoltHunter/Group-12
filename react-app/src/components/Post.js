@@ -57,6 +57,11 @@ const Post = ({post, session}) => {
         setPostLikes(post.likes_count);
     }
 
+    const getDate = () => {
+        const postDate = new Date(post.date_created);
+        return postDate.toLocaleString()
+    }
+
     const renderSharedPost = (sharedPost) => {
         return (
             <div className="ui card">
@@ -69,28 +74,31 @@ const Post = ({post, session}) => {
     }
 
     return (
-        <div className="ui card">
+        <div className="ui centered fluid card">
             <div className="content">
-                <h6>On {post.date_created}, {post.first_name} {post.last_name} posted:</h6>
+                <div class="right floated meta">{getDate()}</div>
+                <div class="">{post.first_name}</div>
+            </div>
+            <div className="content">
                 <p>{post.content}</p>
                 { post.shared_post && renderSharedPost(post.shared_post) }
+            </div>
+            <div class="content">
                 <div>
-                    <div className="ui row">
+                    <div className="ui">
+                        <IconButton 
+                            iconName={ post.liked ? " red heart" : "heart outline"}
+                            label={postLikes}
+                            onClick={(e) => likePost(e)}
+                        />
                         <IconButton
                             iconName="share"
                             label=""
                             onClick=""
                         />
-                        <IconButton 
-                          iconName={ post.liked ? "heart" : "heart outline"}
-                          label={postLikes}
-                          onClick={(e) => likePost(e)}
-                        />
-                    </div>
-                    <div>
                         <IconButton
                             iconName="comment"
-                            label={ showComments ? "Hide Comments" : "Show Comments"}
+                            label={ showComments ? "Hide" : "Show"}
                             onClick={(e) => revealComments(e)}
                         />
                     </div>
@@ -102,6 +110,7 @@ const Post = ({post, session}) => {
                 </div>
             </div>
         </div>
+
             
     )
 }

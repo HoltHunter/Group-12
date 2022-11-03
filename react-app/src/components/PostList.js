@@ -7,11 +7,12 @@ import Post from "./Post";
 
 // Can model this component on UserList.js
 
+
 const PostList = ( {posts, session} ) => {
     return (
         <div>
         <h4>Timeline:</h4>
-        <div className="ui relaxed divided list">
+        <div className="ui relaxed list">
             { 
                 posts.map((post) => {
                     return (
