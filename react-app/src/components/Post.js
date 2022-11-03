@@ -3,6 +3,7 @@ import IconButton from "./IconButton";
 import CommentList from "./commentList";
 import { useState } from "react";
 import axios from '../apis/coreApp';
+import { Link } from "react-router-dom";
 
 
 // Can model this component on UserCard, to start.
@@ -74,10 +75,12 @@ const Post = ({post, session}) => {
     }
 
     return (
-        <div className="ui centered fluid card">
+        <div className="ui centered fluid grey card">
             <div className="content">
                 <div class="right floated meta">{getDate()}</div>
-                <div class="">{post.first_name}</div>
+                <Link to={`/profile/${ post.user_id }`} className="header">
+                    { post.first_name } { post.last_name }
+                </Link>
             </div>
             <div className="content">
                 <p>{post.content}</p>
@@ -102,7 +105,8 @@ const Post = ({post, session}) => {
                             onClick={(e) => revealComments(e)}
                         />
                     </div>
-                    {showComments && <CommentList
+                    {showComments && 
+                    <CommentList
                     session={session}
                     comments={postComments}
                     postId={post.id}
