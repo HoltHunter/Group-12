@@ -57,11 +57,23 @@ const Post = ({post, session}) => {
         setPostLikes(post.likes_count);
     }
 
+    const renderSharedPost = (sharedPost) => {
+        return (
+            <div className="ui card">
+                <div className="content">
+                    <h6>On {sharedPost.date_created}, {sharedPost.first_name} {sharedPost.last_name} posted:</h6>
+                    <p>{sharedPost.content}</p>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="ui card">
             <div className="content">
                 <h6>On {post.date_created}, {post.first_name} {post.last_name} posted:</h6>
                 <p>{post.content}</p>
+                { post.shared_post && renderSharedPost(post.shared_post) }
                 <div>
                     <div className="ui row">
                         <IconButton
