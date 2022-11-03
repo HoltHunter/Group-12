@@ -72,10 +72,18 @@ router
 		try {
 			const user_id = req.body.userId
 			const post_content = req.body.postContent
-			const result = await client.query(`
-			INSERT INTO posts (user_id,content,likes_count)
-				VALUES(${user_id},'${post_content}',0);
-			`)
+			if (req.body.sharedPostId) {
+				await client.query(`
+					INSERT INTO posts (user_id,content,likes_count,shared_post_id)
+					VALUES(${user_id},'${post_content}',0, ${ req.body.sharedPostId });
+				`)
+			} else {
+				await client.query(`
+					INSERT INTO posts (user_id,content,likes_count)
+					VALUES(${user_id},'${post_content}',0);
+				`)
+			}
+			
 			res.send("Success")
 		} catch (err) {
 			console.log(err.stack)
