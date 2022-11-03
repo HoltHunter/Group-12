@@ -46,16 +46,23 @@ const Post = ({post, session}) => {
         <div className="">
             <h6>On {post.date_created}, {post.first_name} {post.last_name} posted:</h6>
             <p>{post.content}</p>
-            <IconButton 
-                iconName="heart"
-                label={post.likes_count}
-                onClick=""
-            />
-            <IconButton
-                iconName="comment"
-                label={ showComments ? "Hide Comments" : "Show Comments"}
-                onClick={(e) => revealComments(e)}
-            />
+            <div>
+                <IconButton
+                    iconName="share"
+                    label=""
+                    onClick=""
+                />
+                <IconButton 
+                    iconName="heart"
+                    label={post.likes_count}
+                    onClick=""
+                />
+                <IconButton
+                    iconName="comment"
+                    label={ showComments ? "Hide Comments" : "Show Comments"}
+                    onClick={(e) => revealComments(e)}
+                />
+            </div>
             {showComments && <CommentList
             session={session}
             comments={postComments}
