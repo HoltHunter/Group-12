@@ -33,7 +33,7 @@ const CreatePost = ({ session }) => {
                         value = {first}
                         required 
                     />
-                    <button type="submit">Post Status</button>
+                    <button className="ui button primary" type="submit">Post Status</button>
                 </div>
             </form>
         </div>

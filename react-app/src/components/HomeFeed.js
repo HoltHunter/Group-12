@@ -25,16 +25,20 @@ class HomeFeed extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="ui container">
                 Home
                 <h4>Hi {this.props.session.username}</h4>
-                <CreatePost
-                    session={this.props.session}
-                />
-                <PostList 
-                    session={this.props.session}
-                    posts={this.state.userPosts}
-                />
+                <div className="ui comments">
+                    <CreatePost
+                        session={this.props.session}
+                    />
+                </div>
+                <div className="ui feed">
+                    <PostList 
+                        session={this.props.session}
+                        posts={this.state.userPosts}
+                    />
+                </div>
             </div>
         )
     }
