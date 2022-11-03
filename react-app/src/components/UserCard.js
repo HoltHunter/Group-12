@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import IconButton from "./IconButton";
 
 // TODO: 
@@ -28,8 +29,10 @@ const UserCard = ({ user, onRequest }) => {
             <div className="content">
                 <i className="large middle aligned icon user left floated" />
                 <div className="header">
+                    <Link to={`/profile/${ user.id }`} className="item">
+                        { user.first_name } { user.last_name }
+                    </Link>
                     
-                    { user.first_name } { user.last_name }
                     { renderButton() }
                 </div>
             </div>

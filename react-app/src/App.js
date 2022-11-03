@@ -21,7 +21,7 @@ class App extends React.Component {
   	render() {
     	return (
       		<div>
-				{ this.state.session && <Header />}
+				{ this.state.session && <Header session={ this.state.session } />}
          		<Routes>
 				 	<Route path='/' 
 						element={<Login setSession={ this.setSession } />} 
