@@ -24,18 +24,17 @@ const CreateComment = ({ postId, session }) => {
     }
 
     return (
-        <div>
-            <form onSubmit={submitComment} className="ui form">
-                <div className="field">
-                    <label>Leave a comment</label>
+        <div class="">
+            <form onSubmit={submitComment} class="ui form">
+                <div class="field">
                     <input 
                         type="text" 
-                        placeholder="My comment..."
+                        placeholder="Add Comment"
                         onChange={event => setFirst(event.target.value)}
                         value = {first}
                         required 
                     />
-                    <button type="submit">Leave Comment</button>
+                    <button type="submit" class="ui button">Leave Comment</button>
                 </div>
             </form>
         </div>
