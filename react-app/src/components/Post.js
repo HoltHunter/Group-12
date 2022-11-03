@@ -1,8 +1,10 @@
 import React from "react";
 import IconButton from "./IconButton";
 import CommentList from "./commentList";
+import SharePost from "./SharePost";
 import { useState } from "react";
 import axios from '../apis/coreApp';
+import { Link } from "react-router-dom";
 
 
 // Can model this component on UserCard, to start.
@@ -22,6 +24,7 @@ import axios from '../apis/coreApp';
 const Post = ({post, session}) => {
 
     const [showComments, setShowComments] = useState(false);
+    const [showShare, setShowShare] = useState(false);
     const [postComments, setComments] = useState([]);
     const [postLikes, setPostLikes] = useState(post.likes_count);
 
@@ -33,6 +36,11 @@ const Post = ({post, session}) => {
             headers: {"Content-Type": "application/json",}
         })
         setComments(response.data)
+    }
+
+    const toggleShowShare = (e) => {
+        e.preventDefault();
+        setShowShare(current => !current);
     }
 
     const revealComments = (e) => {
@@ -62,6 +70,7 @@ const Post = ({post, session}) => {
         return postDate.toLocaleString()
     }
 
+
     const renderSharedPost = (sharedPost) => {
         return (
             <div className="ui card">
@@ -73,11 +82,15 @@ const Post = ({post, session}) => {
         )
     }
 
+
+
     return (
-        <div className="ui centered fluid card">
+        <div className="ui centered fluid grey card">
             <div className="content">
                 <div class="right floated meta">{getDate()}</div>
-                <div class="">{post.first_name}</div>
+                <Link to={`/profile/${ post.user_id }`} className="header">
+                    { post.first_name } { post.last_name }
+                </Link>
             </div>
             <div className="content">
                 <p>{post.content}</p>
@@ -94,7 +107,7 @@ const Post = ({post, session}) => {
                         <IconButton
                             iconName="share"
                             label=""
-                            onClick=""
+                            onClick={(e) => toggleShowShare(e)}
                         />
                         <IconButton
                             iconName="comment"
@@ -102,9 +115,15 @@ const Post = ({post, session}) => {
                             onClick={(e) => revealComments(e)}
                         />
                     </div>
-                    {showComments && <CommentList
+                    {showComments && 
+                    <CommentList
                     session={session}
                     comments={postComments}
+                    postId={post.id}
+                    />}
+                    {showShare && 
+                    <SharePost
+                    session={session}
                     postId={post.id}
                     />}
                 </div>

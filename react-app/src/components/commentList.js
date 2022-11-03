@@ -5,6 +5,7 @@ import CreateComment from "./CreateComment"
 const CommentList = ( {comments, postId, session} ) => {
   return (
     <div>
+      <div class="ui hidden divider"></div>
       <CreateComment
         session={ session }
         postId={ postId }
