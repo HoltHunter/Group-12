@@ -108,13 +108,14 @@ router
                 ORDER BY p.date_created desc
                 LIMIT 10;
             `)
-            const sharedPostIds = result.rows.map(post => post.shared_post_id)
+
+            const sharedPostIds = result.rows.map(post => post.shared_post_id).filter(val => val !== null)
             if (sharedPostIds[0]) {
                 const sharedPosts = await client.query(`
                     SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, p.date_modified
                     FROM posts p
                     JOIN users u ON p.user_id = u.id
-                    WHERE p.id IN (${ sharedPostIds })
+                    WHERE p.id IN (${ "'" + sharedPostIds.join("','") + "'" })
                 `)
                 const newResults = []
                 for (const post of result.rows) {
@@ -181,13 +182,13 @@ router
                 ORDER BY p.date_created DESC
                 LIMIT 10;
             `)
-            const sharedPostIds = result.rows.map(post => post.shared_post_id)
+            const sharedPostIds = result.rows.map(post => post.shared_post_id).filter(val => val !== null)
             if (sharedPostIds[0]) {
                 const sharedPosts = await client.query(`
                     SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name
                     FROM posts p
                     JOIN users u ON p.user_id = u.id
-                    WHERE p.id IN (${ sharedPostIds })
+                    WHERE p.id IN (${ "'" + sharedPostIds.join("','") + "'" })
                 `)
                 const newResults = []
                 for (const post of result.rows) {
