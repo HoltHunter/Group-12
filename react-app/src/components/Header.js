@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = (session) => {
     return (
         <div className="ui secondary pointing menu">
             <Link to="/home" className="item">
@@ -12,9 +12,10 @@ const Header = () => {
                 Search Users
             </Link>
 
-            <Link to="/profile" className="item">
+            { session && 
+            <Link to={`/profile/${ session.session.userId }`} className="item">
                 View Profile
-            </Link>
+            </Link>}
         </div>
     )
 }
