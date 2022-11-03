@@ -71,9 +71,11 @@ router
             const userId = req.body.userId
             let { id } = req.params   // Pull id from URL parameter
             const result = await client.query(`
-                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name
+                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, 
+                    CASE WHEN l.user_id IS NOT NULL THEN true ELSE false END as liked
                 FROM posts p
                 JOIN users u ON p.user_id = u.id
+                LEFT JOIN post_likes l on l.user_id = ${ userId } and l.post_id = p.id
                 WHERE p.user_id = ${ id }
                 ORDER BY p.date_created desc
                 LIMIT 10;
@@ -121,55 +123,17 @@ router
             console.log(friends.rows)
             console.log("'" + friends.rows.map(value => value.user_id === userId ? value.other_user_id : value.user_id ).join("','") + "'")
             const result = await client.query(`
-                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name
+                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, 
+                CASE WHEN l.user_id IS NOT NULL THEN true ELSE false END as liked
                 FROM posts p
                 JOIN users u ON p.user_id = u.id
+                LEFT JOIN post_likes l on l.user_id = ${ userId } and l.post_id = p.id
                 WHERE p.user_id != ${ userId }
                 AND p.user_id IN (${"'" + friends.rows.map(value => value.user_id === userId ? value.other_user_id : value.user_id ).join("','") + "'"})
                 ORDER BY p.date_created DESC
                 LIMIT 10;
             `)
             res.send(result.rows)
-        } catch (err) {
-            console.log(err.stack)
-        } finally {
-            client.release()
-        }
-    })
-    // Configure likes for posts
-    .post('/likes', async (req, res) => {
-        const client = await pool.connect()
-        try {
-            const userId = req.body.userId
-            const postId = req.body.postId
-            const result = await client.query(`
-                SELECT pl.user_id, pl.post_id
-                FROM post_likes pl
-                WHERE pl.user_id = ${ userId } AND pl.post_id = ${ postId };
-            `)
-            if (result.rows == "") {
-                client.query(`
-                    INSERT INTO post_likes (user_id, post_id)
-                    VALUES(${userId},${postId});
-                `)
-                client.query(`
-                    UPDATE posts
-                    SET likes_count = likes_count+1
-                    WHERE id = ${ postId };
-                `)
-                res.send("Post like added!")
-            } else {
-                client.query(`
-                    DELETE FROM post_likes
-                    WHERE user_id = ${ userId } AND post_id = ${ postId };
-                `)
-                client.query(`
-                    UPDATE posts
-                    SET likes_count = likes_count-1
-                    WHERE id = ${ postId };
-                `)
-                res.send("Post like deleted!")
-            }
         } catch (err) {
             console.log(err.stack)
         } finally {
