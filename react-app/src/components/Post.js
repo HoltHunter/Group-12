@@ -58,31 +58,37 @@ const Post = ({post, session}) => {
     }
 
     return (
-        <div className="">
-            <h6>On {post.date_created}, {post.first_name} {post.last_name} posted:</h6>
-            <p>{post.content}</p>
-            <div>
-                <IconButton
-                    iconName="share"
-                    label=""
-                    onClick=""
-                />
-                  <IconButton 
-                  iconName={ post.liked ? "heart" : "heart outline"}
-                  label={postLikes}
-                  onClick={(e) => likePost(e)}
-                />
-                <IconButton
-                    iconName="comment"
-                    label={ showComments ? "Hide Comments" : "Show Comments"}
-                    onClick={(e) => revealComments(e)}
-                />
+        <div className="ui card">
+            <div className="content">
+                <h6>On {post.date_created}, {post.first_name} {post.last_name} posted:</h6>
+                <p>{post.content}</p>
+                <div>
+                    <div className="ui row">
+                        <IconButton
+                            iconName="share"
+                            label=""
+                            onClick=""
+                        />
+                        <IconButton 
+                          iconName={ post.liked ? "heart" : "heart outline"}
+                          label={postLikes}
+                          onClick={(e) => likePost(e)}
+                        />
+                    </div>
+                    <div>
+                        <IconButton
+                            iconName="comment"
+                            label={ showComments ? "Hide Comments" : "Show Comments"}
+                            onClick={(e) => revealComments(e)}
+                        />
+                    </div>
+                    {showComments && <CommentList
+                    session={session}
+                    comments={postComments}
+                    postId={post.id}
+                    />}
+                </div>
             </div>
-            {showComments && <CommentList
-            session={session}
-            comments={postComments}
-            postId={post.id}
-            />}
         </div>
             
     )
