@@ -23,6 +23,7 @@ const Post = ({post, session}) => {
 
     const [showComments, setShowComments] = useState(false);
     const [postComments, setComments] = useState([]);
+    const [postLikes, setPostLikes] = useState(post.likes_count);
 
     const getComments = async () => {
         const reqBody = ""
@@ -42,6 +43,20 @@ const Post = ({post, session}) => {
         setShowComments(current => !current);
     }
 
+    const sendLike = async () => {
+        const reqBody = JSON.stringify({ userId: session.userId, postId: post.id })
+        const url = "/create/likes"
+        const response = await axios.post(url, reqBody, {
+            withCredentials: true,
+            headers: {"Content-Type": "application/json",}
+        })
+    }
+
+    const likePost = (e) => {
+        sendLike();
+        setPostLikes(post.likes_count);
+    }
+
     return (
         <div className="ui card">
             <div className="content">
@@ -55,9 +70,9 @@ const Post = ({post, session}) => {
                             onClick=""
                         />
                         <IconButton 
-                            iconName="heart"
-                            label={post.likes_count}
-                            onClick=""
+                          iconName={ post.liked ? "heart" : "heart outline"}
+                          label={postLikes}
+                          onClick={(e) => likePost(e)}
                         />
                     </div>
                     <div>
