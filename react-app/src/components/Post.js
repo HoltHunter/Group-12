@@ -96,7 +96,7 @@ const Post = ({post, session}) => {
             <div className="content">
                 <div className="right floated meta">
                     { getDate() }
-                    { post.user_id === session.userId && <i class="edit icon" onClick={ () => toggleEditMode(post.content) }/>}
+                    { post.user_id === session.userId && <i className="edit icon" onClick={ () => toggleEditMode(post.content) }/>}
                 </div>
                 <div className="header">{ post.first_name }</div>
             </div>
