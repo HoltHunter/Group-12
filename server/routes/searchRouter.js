@@ -136,5 +136,45 @@ router
             client.release()
         }
     })
-
+    // Configure likes for posts
+    .post('/likes', async (req, res) => {
+        const client = await pool.connect()
+        try {
+            const userId = req.body.userId
+            const postId = req.body.postId
+            const result = await client.query(`
+                SELECT pl.user_id, pl.post_id
+                FROM post_likes pl
+                WHERE pl.user_id = ${ userId } AND pl.post_id = ${ postId };
+            `)
+            if (result.rows == "") {
+                client.query(`
+                    INSERT INTO post_likes (user_id, post_id)
+                    VALUES(${userId},${postId});
+                `)
+                client.query(`
+                    UPDATE posts
+                    SET likes_count = likes_count+1
+                    WHERE id = ${ postId };
+                `)
+                res.send("Post like added!")
+            } else {
+                client.query(`
+                    DELETE FROM post_likes
+                    WHERE user_id = ${ userId } AND post_id = ${ postId };
+                `)
+                client.query(`
+                    UPDATE posts
+                    SET likes_count = likes_count-1
+                    WHERE id = ${ postId };
+                `)
+                res.send("Post like deleted!")
+            }
+        } catch (err) {
+            console.log(err.stack)
+        } finally {
+            client.release()
+        }
+    })
+    
 module.exports = router;
