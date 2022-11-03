@@ -148,5 +148,25 @@ router
             client.release()
         }
     })
+	.post('/posts/:id', async (req, res) => {
+		const client = await pool.connect()
+		try {
+			const post_content = req.body.postContent
+			let { id } = req.params   // Pull id from URL parameter
+			
+			await client.query(`
+				UPDATE posts
+				SET content = '${ post_content }'
+				WHERE id = ${ id }
+				;
+			`)
+			
+			res.send("Success")
+		} catch (err) {
+			console.log(err.stack)
+		} finally {
+			client.release()
+		}
+    })
 
 module.exports = router;
