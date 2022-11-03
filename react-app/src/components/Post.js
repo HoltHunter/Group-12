@@ -49,16 +49,16 @@ const Post = ({post, session}) => {
                 <p>{post.content}</p>
                 <div>
                     <div className="ui row">
-                        {/* <IconButton
+                        <IconButton
                             iconName="share"
                             label=""
                             onClick=""
-                        /> */}
-                        {/* <IconButton 
+                        />
+                        <IconButton 
                             iconName="heart"
                             label={post.likes_count}
                             onClick=""
-                        /> */}
+                        />
                     </div>
                     <div>
                         <IconButton
