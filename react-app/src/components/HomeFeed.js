@@ -1,6 +1,8 @@
 import React from "react";
 import PostList from "./PostList";
 import axios from '../apis/coreApp';
+import CreatPost from "./CreatePost";
+import CreatePost from "./CreatePost";
 
 class HomeFeed extends React.Component {
     
@@ -26,6 +28,9 @@ class HomeFeed extends React.Component {
             <div>
                 Home
                 <h4>Hi {this.props.session.username}</h4>
+                <CreatePost
+                    session={this.props.session}
+                />
                 <PostList 
                     session={this.props.session}
                     posts={this.state.userPosts}
