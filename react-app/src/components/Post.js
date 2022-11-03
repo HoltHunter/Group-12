@@ -3,6 +3,7 @@ import IconButton from "./IconButton";
 import CommentList from "./commentList";
 import { useState } from "react";
 import axios from '../apis/coreApp';
+import CreatePost from "./CreatePost";
 
 
 // Can model this component on UserCard, to start.
@@ -20,8 +21,8 @@ import axios from '../apis/coreApp';
 
 
 const Post = ({post, session}) => {
-
     const [showComments, setShowComments] = useState(false);
+    const [editMode, setEditMode] = useState(false)
     const [postComments, setComments] = useState([]);
     const [postLikes, setPostLikes] = useState(post.likes_count);
 
@@ -64,26 +65,38 @@ const Post = ({post, session}) => {
 
     const renderSharedPost = (sharedPost) => {
         return (
-            <div className="ui card">
+            <div className="ui centered fluid card">
                 <div className="content">
-                    <h6>On {sharedPost.date_created}, {sharedPost.first_name} {sharedPost.last_name} posted:</h6>
+                    <div className="right floated meta">{ new Date(sharedPost.date_created).toLocaleString() }</div>
+                    <div className="header">{sharedPost.first_name}</div>
+                </div>
+                <div className="content">
                     <p>{sharedPost.content}</p>
                 </div>
             </div>
         )
     }
 
+    const toggleEditMode = (newContent) => {
+        setEditMode(editMode => !editMode)
+        post.content = newContent
+    }
+
     return (
         <div className="ui centered fluid card">
             <div className="content">
-                <div class="right floated meta">{getDate()}</div>
-                <div class="">{post.first_name}</div>
+                <div className="right floated meta">
+                    { getDate() }
+                    { post.user_id === session.userId && <i class="edit icon" onClick={ () => toggleEditMode(post.content) }/>}
+                </div>
+                <div className="header">{ post.first_name }</div>
             </div>
             <div className="content">
-                <p>{post.content}</p>
+                { !editMode && <p>{post.content}</p>}
+                { editMode && <CreatePost session={ session } postId={ post.id } initialValue={ post.content } toggleEdit={ toggleEditMode } />}
                 { post.shared_post && renderSharedPost(post.shared_post) }
             </div>
-            <div class="content">
+            <div className="content">
                 <div>
                     <div className="ui">
                         <IconButton 

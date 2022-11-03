@@ -4,21 +4,28 @@ import axios from '../apis/coreApp'
 
 
 
-const CreatePost = ({ session }) => {
-
-    const [first, setFirst] = useState('');
+const CreatePost = ({ session, postId, initialValue, toggleEdit }) => {
+    const [first, setFirst] = useState(initialValue ? initialValue : '');
 
     const submitComment = async ( event ) => {
         event.preventDefault();
 
-        const reqBody = JSON.stringify({ userId: session.userId, postContent: first })
-        const response = await axios.post('/create/newPost', reqBody, {
-            withCredentials: true,
-            headers: {"Content-Type": "application/json",}
-        })
-        console.log(response);
+        if (postId) {
+            const reqBody = JSON.stringify({ postContent: first })
+            const response = await axios.post(`/create/posts/${postId}`, reqBody, {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",}
+            })
+            toggleEdit(first)
+        } else {
+            const reqBody = JSON.stringify({ userId: session.userId, postContent: first })
+            const response = await axios.post('/create/newPost', reqBody, {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",}
+            })
 
-        setFirst('');
+            setFirst('');
+        }
     }
 
     return (
