@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            ls
+            cd server
             pnpm test
       - save_cache:
           name: Save pnpm Package Cache
