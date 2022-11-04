@@ -18,7 +18,7 @@ jobs:
   run-tests:
     docker:
       - image: cimg/base:stable
-    working_directory: ./server
+    working_directory: ../server/
     steps:
       - checkout
       - node/install-packages:
