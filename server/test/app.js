@@ -4,11 +4,19 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 let app = require('../app')
 
+const setup = require('./src/setup.js')
+
+
 chai.use(chaiHttp)
 
 const baseUrl = 'http://localhost:8081'
 
 /* NOTE: You must be running the app server for these tests to pass. */
+
+
+
+setup.connect()
+
 
 describe("Login (API)", function() {
     it('Should create a new user.', function(done) {
