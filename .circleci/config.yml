@@ -9,7 +9,7 @@ orbs:
 jobs:
   say-hello:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:14.17
     steps:
       - checkout
       - run: 
