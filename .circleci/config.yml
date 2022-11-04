@@ -30,13 +30,13 @@ jobs:
     parallelism: 10
     steps:
       - checkout
-      - run:
-          name: Wait for Postgres
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - restore_cache:
           name: Restore pnpm Package Cache
           keys:
             - pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
+      - run:
+          name: Wait for Postgres
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Install pnpm package manager
           command: |
