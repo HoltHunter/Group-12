@@ -21,12 +21,6 @@ jobs:
     parallelism: 10
     steps:
       - checkout
-      - run:
-          name: Change directory
-          command: |
-            ls
-            cd server
-            ls
       - restore_cache:
           name: Restore pnpm Package Cache
           keys:
@@ -34,15 +28,17 @@ jobs:
       - run:
           name: Install pnpm package manager
           command: |
-            ls
+            cd server
             curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm@7
       - run:
           name: Install Dependencies
           command: |
+            cd server
             pnpm install
       - run:
           name: Run tests
           command: |
+            cd server
             pnpm test
       - save_cache:
           name: Save pnpm Package Cache
