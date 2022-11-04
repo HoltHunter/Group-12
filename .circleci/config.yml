@@ -12,9 +12,6 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - node/install:
-          install-npm: true
-          node-version: '16.13'
       - run: 
           name: "say hello"
           command: "echo Hello, world!"
