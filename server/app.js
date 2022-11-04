@@ -72,3 +72,5 @@ io.on("connect", socket => {});
 server.listen(8081, () => {
     console.log("Server listening on port 8081")
 });
+
+module.exports = app;

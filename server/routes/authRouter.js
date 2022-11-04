@@ -11,7 +11,6 @@ const formSchema = Yup.object({
 
 router
   	.get("/login", async (req, res) => {
-    	console.log(req.session);
       	if (req.session.user && req.session.user.username) {
           	res.json({ loggedIn: true, userId: req.session.user.id, username: req.session.user.username });
       	} else {
