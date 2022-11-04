@@ -5,6 +5,8 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.3
 
+version: 2.1
+
 jobs:
   say-hello:
     docker:
@@ -17,6 +19,14 @@ jobs:
   run-tests:
     docker:
       - image: node:18
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_DB: cse_database
+          POSTGRES_USER: cse_username
+          POSTGRES_PASSWORD: cse_password
+        auth:
+          username: mydockerhub-user
+          password: cse_password
     resource_class: large
     parallelism: 10
     steps:
@@ -35,6 +45,17 @@ jobs:
           command: |
             cd server
             pnpm install --no-frozen-lockfile
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client
+      - run: whoami
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "CREATE TABLE test (name char(25));"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
       - run:
           name: Run tests
           command: |
