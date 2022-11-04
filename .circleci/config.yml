@@ -39,10 +39,6 @@ jobs:
             cd server
             curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm@7
       - run:
-          name: Wait for Postgres to be ready
-          command: | 
-            dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
           name: Install Dependencies
           command: |
             cd server
