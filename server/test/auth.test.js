@@ -2,6 +2,7 @@ let chai = require('chai')
 let chaiHTTP = require('chai-http')
 let app = require('../app')
 let should = chai.should
+const assert = require('chai').assert;
 
 chai.use(chaiHTTP)
 
@@ -10,8 +11,8 @@ describe("Login (Module)", function() {
         chai.request(app)
             .get('/auth/login')
             .end((err, res) => {
-                res.should.have.status(200)
-                res.body.data.loggedIn.should.equal(false)
+                assert.equal(200, res.status)
+                assert.equal(false, res.body.loggedIn)
                 done()
             })
     });
