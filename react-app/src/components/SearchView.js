@@ -62,7 +62,7 @@ class SearchView extends React.Component {
     render() {
         if (this.props.session) {
             return(
-                <div>
+                <div className='ui container'>
                     <h1>Hi {this.props.session.username}</h1>
                     <SearchBar 
                         onFormSubmit={ this.onFormSubmit }
