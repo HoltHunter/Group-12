@@ -17,6 +17,7 @@ const Profile = ({ session }) => {
     const [userPosts, setUserPosts] = useState([])
     const [userInfo, setUserInfo] = useState(null)
     const { id } = useParams()
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
         retrieveUserInfo(parseInt(id))
@@ -39,6 +40,15 @@ const Profile = ({ session }) => {
             headers: {"Content-Type": "application/json",}
         })
         setUserPosts(response.data)
+    }
+
+    const getNotifications = async () => {
+        const reqBody = JSON.stringify({ userId: session.userId })
+        const response = await axios.post(`/search/users/`, reqBody, {
+            withCredentials: true,
+            headers: {"Content-Type": "application/json",}
+        })
+        setUserInfo(response.data[0])
     }
 
     return (
