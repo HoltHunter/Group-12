@@ -17,6 +17,14 @@ jobs:
   run-tests:
     docker:
       - image: node:18
+      - image: cimg/postgres:14.0
+        auth: 
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
+        environment:
+          POSTGRES_DB: cse_database
+          POSTGRES_USER: cse_username
+          POSTGRES_PASSWORD: cse_password
     resource_class: large
     parallelism: 10
     steps:
@@ -30,6 +38,10 @@ jobs:
           command: |
             cd server
             curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm@7
+      - run:
+          name: Wait for Postgres to be ready
+          command: | 
+            dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Install Dependencies
           command: |
