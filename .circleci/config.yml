@@ -4,14 +4,17 @@ version: 2.1
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
 # See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
-  node: circleci/node@4.7
+  node: circleci/node@16.13
 
 jobs:
   say-hello:
     docker:
-      - image: cimg/node:16.13
+      - image: cimg/base:stable
     steps:
       - checkout
+      - node/install:
+          install-npm: true
+          node-version: '16.13'
       - run: 
           name: "say hello"
           command: "echo Hello, world!"
@@ -21,6 +24,9 @@ jobs:
     working_directory: ~/server/
     steps:
       - checkout
+      - node/install:
+          install-npm: true
+          node-version: '16.13'
       - node/install-packages:
           pkg-manager: npm
       - run: 
