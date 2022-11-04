@@ -4,7 +4,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 let app = require('../app')
 
-const setup = require('./src/setup.js')
+const setup = require('../src/setup')
 
 
 chai.use(chaiHttp)
