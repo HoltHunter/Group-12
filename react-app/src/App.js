@@ -1,44 +1,61 @@
 import { Route, Routes } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./components/Login";
-import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css'; //Custom React folder to handle CSS styles
+import axios from "../src/apis/coreApp";
 import SearchView from "./components/SearchView";
 import Header from "./components/Header";
 import Profile from "./components/Profile";
 import HomeFeed from "./components/HomeFeed";
+import { Navigate } from "react-router-dom";
 
-class App extends React.Component {
-  	state = {
-		session: null
-  	}
+const App = () => {
+	const [session, setSession] = useState(null)
+	const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  	setSession = (session) => {
-		console.log("Session data: ", session)
-		this.setState({ session: session })
-  	}
+	useEffect(() => {
+		requireAuth()
+	})
 
-  	render() {
-    	return (
-      		<div>
-				{ this.state.session && <Header session={ this.state.session } />}
-         		<Routes>
-				 	<Route path='/' 
-						element={<Login setSession={ this.setSession } />} 
-					/>
-          			<Route path='/home' 
-						element={<HomeFeed session={ this.state.session } />} 
-					/>
-					<Route path='/search' 
-						element={<SearchView session={ this.state.session } />} 
-					/>
-					<Route path='/profile/:id' 
-						element={<Profile session={ this.state.session } />} 
-					/>
-        		</Routes>
-      		</div>
-    	);
-  	}
+	const signOut = () => {
+		setSession(null)
+		setIsAuthenticated(false)
+	}
+
+	const setSessionAndAuth = (data) => {
+		setSession(data)
+		setIsAuthenticated(true)
+	}
+
+	const requireAuth = async () => {
+		if (session === null) {
+			setIsAuthenticated(false)
+		} else {
+			const auth = await axios.get('/auth/login/', {
+				withCredentials: true
+			})
+			setIsAuthenticated(auth.data.loggedIn)
+		}
+	}
+
+	return (
+		<div>
+			{ session && isAuthenticated && <Header session={ session } signOut={ signOut } />}
+			<Routes>
+				<Route path='/' 
+					element={<Login setSession={ setSessionAndAuth } />} 
+				/>
+				<Route path='/home' 
+					element={ isAuthenticated ? <HomeFeed session={ session } /> : <Navigate to="/" /> } 
+				/> 
+				<Route path='/search' 
+					element={ isAuthenticated ? <SearchView session={ session } /> : <Navigate to="/" /> } 
+				/>
+				<Route path='/profile/:id' 
+					element={ isAuthenticated ? <Profile session={ session } /> : <Navigate to="/" /> } 
+				/>
+			</Routes>
+		</div>
+	);
 }
 
 export default App;

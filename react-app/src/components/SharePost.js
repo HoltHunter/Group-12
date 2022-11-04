@@ -2,10 +2,7 @@ import React from "react";
 import {useState} from 'react';
 import axios from '../apis/coreApp'
 
-
-
 const SharePost = ({ postId, session }) => {
-
     const [first, setFirst] = useState('');
 
     const sharePost = async (event) => {
@@ -22,18 +19,18 @@ const SharePost = ({ postId, session }) => {
     }
 
     return (
-        <div class="">
+        <div className="">
             <div className="ui hidden divider"></div>
-            <form onSubmit={sharePost} class="ui form">
-                <div class="field">
-                    <div class="ui action input">
+            <form onSubmit={sharePost} className="ui form">
+                <div className="field">
+                    <div className="ui action input">
                         <input 
                             type="text" 
                             placeholder="Add optional comment to share with post... "
                             onChange={event => setFirst(event.target.value)}
                             value = {first} 
                         />
-                        <button type="submit" class="ui button">Add to Timeline</button>
+                        <button type="submit" className="ui button">Add to Timeline</button>
                     </div>
                 </div>
             </form>

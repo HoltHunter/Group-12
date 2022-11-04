@@ -26,7 +26,7 @@ class HomeFeed extends React.Component {
     render() {
         return (
             <div className="ui stackable grid">
-                <div class="centered six wide column computer">
+                <div className="centered six wide column computer">
                     Home
                     <h4>Hi {this.props.session.username}</h4>
                     <div className="ui comments">
