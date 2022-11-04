@@ -14,7 +14,7 @@ const CommentList = ( {comments, postId, session} ) => {
           {
             comments.map((comment) => {
             return (
-                <div key={ comment.id } class="">
+                <div key={ comment.id } className="">
                     <Comment 
                       comment={ comment } 
                     />

@@ -33,7 +33,7 @@ const CreatePost = ({ session, postId, initialValue, toggleEdit }) => {
             <form onSubmit={submitComment} className="ui form">
                 <div className="field">
                     <label>Post to your timeline:</label>
-                    <div class="ui action input">
+                    <div className="ui action input">
                     <input 
                         type="text" 
                         placeholder="My post"
@@ -41,7 +41,7 @@ const CreatePost = ({ session, postId, initialValue, toggleEdit }) => {
                         value = {first}
                         required 
                     />
-                    <button class="ui button primary" type="submit">Post Status</button>
+                    <button className="ui button primary" type="submit">Post Status</button>
                     </div>
                 </div>
             </form>

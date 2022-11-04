@@ -7,20 +7,20 @@ const Comment = ({comment}) => {
   
 
   return (
-    <div class="comment">
-      <a class="avatar">
+    <div className="comment">
+      <a className="avatar">
         <img src={"https://i.pravatar.cc/300?u=" + comment.user_id}/>
       </a>
-      <div class="content">
+      <div className="content">
         <Link to={`/profile/${ comment.user_id }`} className="author">
             { comment.first_name } { comment.last_name }
         </Link>
-        <div class="metadata">
-          <div class="date">
+        <div className="metadata">
+          <div className="date">
             date
           </div>
         </div>
-        <div class="text">
+        <div className="text">
           {comment.content}
         </div>
       </div>
