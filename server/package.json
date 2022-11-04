@@ -29,9 +29,7 @@
     "session": "^0.1.0",
     "sessions": "^0.0.2-7",
     "socket.io": "^4.5.2",
-    "yup": "^0.32.11"
-  },
-  "devDependencies": {
+    "yup": "^0.32.11",
     "chai": "^4.3.6",
     "mocha": "^10.0.0"
   }
