@@ -17,14 +17,6 @@ jobs:
   run-tests:
     docker:
       - image: node:18
-      - image: cimg/postgres:14.0
-        environment:
-          POSTGRES_DB: cse_database
-          POSTGRES_USER: cse_username
-          POSTGRES_PASSWORD: cse_password
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: large
     parallelism: 10
     steps:
@@ -43,14 +35,6 @@ jobs:
           command: |
             cd server
             pnpm install --no-frozen-lockfile
-      - run:
-          name: install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.6.1
-      - run: 
-          name: Wait for Postgres to be ready
-          command: dockerize - wait tcp//localhost:5432 -timeout 1m
       - run:
           name: Run tests
           command: |
