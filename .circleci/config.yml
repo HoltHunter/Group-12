@@ -5,8 +5,6 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.3
 
-version: 2.1
-
 jobs:
   say-hello:
     docker:
