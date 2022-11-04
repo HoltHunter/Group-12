@@ -43,17 +43,9 @@ jobs:
           command: |
             cd server
             pnpm install --no-frozen-lockfile
-      - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client
-      - run: whoami
-      - run: |
-          psql \
-          -d $TEST_DATABASE_URL \
-          -c "CREATE TABLE test (name char(25));"
-      - run: |
-          psql \
-          -d $TEST_DATABASE_URL \
-          -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
+      - run: 
+          name: Wait for Postgres to be ready
+          command: dockerize - wait tcp//localhost:5432 -timeout 1m
       - run:
           name: Run tests
           command: |
