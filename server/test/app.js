@@ -11,48 +11,41 @@ const baseUrl = 'http://localhost:8081'
 /* NOTE: You must be running the app server for these tests to pass. */
 
 describe("Login (API)", function() {
-    it('Should state logged in is false', function(done) {
+    it('Should create a new user.', function(done) {
+        const reqBody = JSON.stringify({"firstName":"Tony","lastName":"Stark","username":"tony@stark.com","password":"ironman"})
         chai.request(app)
-            .get('/auth/login')
+            .post('/create/newUser', reqBody, {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",}
+            })
             .end((err, res) => {
                 assert.equal(200, res.status)
-                assert.equal(false, res.body.loggedIn)
                 done()
             })
     });
-    // it('Return true', function() {
-    //     const params = { username: "john", password: "password" }
-        
-    //     chai.request(baseUrl)
-    //         .post('/login')
-    //         .send(params)
-    //         .end((err, res) => {
-    //             res.text.should.be.a('string')
-    //             res.text.should.equal("welcome, john")
-    //         })
-    // });
-
-    // it('Failed Login - Username DNE', function() {
-    //     const params = { username: "sal", password: "password" }
-        
-    //     chai.request(baseUrl)
-    //         .post('/login')
-    //         .send(params)
-    //         .end((err, res) => {
-    //             res.text.should.be.a('string')
-    //             res.text.should.equal("No entry for you, villain.")
-    //         })
-    // });
-        
-    // it('Failed Login - Wrong Password', function() {
-    //     const params = { username: "john", password: "wordpass" }
-        
-    //     chai.request(baseUrl)
-    //         .post('/login')
-    //         .send(params)
-    //         .end((err, res) => {
-    //             res.text.should.be.a('string')
-    //             res.text.should.equal("No entry for you, villain.")
-    //         })
-    // });
+    it('Should login.', function(done) {
+        chai.request(app)
+            .post('/auth/login', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",},
+            })
+            .send({"username":"tony@stark.com","password":"ironman"})
+            .end((err, res) => {
+                // console.log(res)
+                assert.equal(200, res.status)
+                done()
+            })
+    });
+    it('Should logout.', function(done) {
+        chai.request(app)
+            .post('/auth/logout', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",},
+            })
+            .end((err, res) => {
+                // console.log(res)
+                assert.equal(200, res.status)
+                done()
+            })
+    });
 })

@@ -7,33 +7,41 @@ const assert = require('chai').assert;
 chai.use(chaiHTTP)
 
 describe("Login (Module)", function() {
-    it('Should state logged in is false', function(done) {
+    it('Should create a new user.', function(done) {
+        const reqBody = JSON.stringify({"firstName":"Tony","lastName":"Stark","username":"tony@stark.com","password":"ironman"})
         chai.request(app)
-            .get('/auth/login')
+            .post('/create/newUser', reqBody, {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",}
+            })
             .end((err, res) => {
                 assert.equal(200, res.status)
-                assert.equal(false, res.body.loggedIn)
                 done()
             })
     });
-
-    // it('Successful Login (expect)', function() {
-    //     const result = auth.authenticate("john","password")
-    //     expect(result).to.be.a('boolean')
-    //     expect(result).to.equal(true)
-    // });
-
-    // it('Successful Login (assert)', function() {
-    //     const result = auth.authenticate("john","password")
-    //     assert.typeOf(result, 'boolean')
-    //     assert.isTrue(result)
-    // });
-    
-    // it('Failed Login - Username DNE', function() {
-    //     assert.isFalse(auth.authenticate("sal","password"))
-    // });
-    
-    // it('Failed Login - Wrong Password', function() {
-    //     assert.isFalse(auth.authenticate("joan","password"))
-    // });    
+    it('Should login.', function(done) {
+        chai.request(app)
+            .post('/auth/login', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",},
+            })
+            .send({"username":"tony@stark.com","password":"ironman"})
+            .end((err, res) => {
+                // console.log(res)
+                assert.equal(200, res.status)
+                done()
+            })
+    });
+    it('Should logout.', function(done) {
+        chai.request(app)
+            .post('/auth/logout', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",},
+            })
+            .end((err, res) => {
+                // console.log(res)
+                assert.equal(200, res.status)
+                done()
+            })
+    });
 })
