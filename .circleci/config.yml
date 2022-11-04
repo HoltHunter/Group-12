@@ -24,7 +24,7 @@ jobs:
           POSTGRES_PASSWORD: cse_password
         auth:
           username: mydockerhub-user
-          password: cse_password
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: large
     parallelism: 10
     steps:
