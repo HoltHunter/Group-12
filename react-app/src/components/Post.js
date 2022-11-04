@@ -77,7 +77,11 @@ const Post = ({post, session}) => {
             <div className="ui centered fluid card">
                 <div className="content">
                     <div className="right floated meta">{ new Date(sharedPost.date_created).toLocaleString() }</div>
-                    <div className="header">{sharedPost.first_name}</div>
+                    <div className="header">
+                        <Link to={`/profile/${ sharedPost.user_id }`} >
+                            { sharedPost.first_name }
+                        </Link>
+                    </div>
                 </div>
                 <div className="content">
                     <p>{sharedPost.content}</p>
@@ -98,7 +102,11 @@ const Post = ({post, session}) => {
                     { getDate() }
                     { post.user_id === session.userId && <i className="edit icon" onClick={ () => toggleEditMode(post.content) }/>}
                 </div>
-                <div className="header">{ post.first_name }</div>
+                <div className="header">
+                    <Link to={`/profile/${ post.user_id }`} >
+                        { post.first_name }
+                    </Link>
+                </div>
             </div>
             <div className="content">
                 { !editMode && <p>{post.content}</p>}
@@ -126,14 +134,14 @@ const Post = ({post, session}) => {
                     </div>
                     {showComments && 
                     <CommentList
-                    session={session}
-                    comments={postComments}
-                    postId={post.id}
+                        session={session}
+                        comments={postComments}
+                        postId={post.id}
                     />}
                     {showShare && 
                     <SharePost
-                    session={session}
-                    postId={post.id}
+                        session={session}
+                        postId={post.id}
                     />}
                 </div>
             </div>
