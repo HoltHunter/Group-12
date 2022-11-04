@@ -4,7 +4,7 @@
   "description": "This GitHub repo contains the project and project artifacts for the Lab section of CSE 6214.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha './test/*.js'"
   },
   "keywords": [],
   "author": "",
