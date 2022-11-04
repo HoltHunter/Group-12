@@ -7,8 +7,8 @@ import axios from '../apis/coreApp'
 const Header = (session, signOut) => {
     const [users, setUsers] = useState([]);
 
+
     useEffect(() => {
-        console.log("test1", session.session.userId);
         getUsers();
     }, []);
 
@@ -20,20 +20,29 @@ const Header = (session, signOut) => {
             headers: {"Content-Type": "application/json",}
         })
         setUsers(response.data);
-        console.log("Hello world");
-        console.log(response.data);
-        filterFriends();
-        //console.log(users);
     }
 
     const filterFriends = () => {
-        users.filter((user) => {
+        return users.filter((user) => {
             if (user.friend_request_id !== undefined && user.friend_request_id !== null) {
                 return user
-            } else {
-                return
-            }
+            } 
         })
+    }
+
+    const respondRequest = (userId, friendRequestId, decision, e) => {
+        e.preventDefault();
+
+        const reqBody = JSON.stringify({request_id: friendRequestId, decision: decision})
+        axios.post('/create/acceptFriendRequest', reqBody, {
+            withCredentials: true,
+            headers: {"Content-Type": "application/json",}
+        })
+        
+        setUsers(users.filter(user => user.id !== userId))
+
+        console.log("sent a request to", userId);
+        console.log("From", session.session.userId);
     }
 
 
@@ -55,14 +64,18 @@ const Header = (session, signOut) => {
 
             { session &&
             <div className="ui icon top left simple dropdown button">
-            <i className="bell icon"></i>
+            <i className={filterFriends().length > 0 ? "bell green icon" : "bell icon"}></i>
             <div className="menu">
               <div className="header">Notifications</div>
               {
-                users.map((user) => {
+                filterFriends().map((user) => {
                         return (
                             <div key={ user.id } className="item">
-                                {user.first_name}
+                                <div className="item">{user.first_name} {user.last_name}</div>
+                                <div className="ui small basic icon buttons">
+                                    <button className="ui button" onClick={(e) => respondRequest(user.id, user.friend_request_id, true, e)}><i className="checkmark green icon"></i></button>
+                                    <button className="ui button" onClick={(e) => respondRequest(user.id, user.friend_request_id, false, e)}><i className="x red icon"></i></button>
+                                </div>
                             </div>
                         )
                     })
