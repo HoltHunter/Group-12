@@ -21,7 +21,7 @@ const Profile = ({ session }) => {
     useEffect(() => {
         retrieveUserInfo(parseInt(id))
         retrievePosts(parseInt(id))
-    }, [])
+    }, [id])
 
     const retrieveUserInfo = async (userId) => {
         const reqBody = JSON.stringify({ userId: session.userId })
