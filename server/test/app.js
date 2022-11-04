@@ -12,7 +12,7 @@ const baseUrl = 'http://localhost:8081'
 
 describe("Login (API)", function() {
     it('Should create a new user.', function(done) {
-        this.timeout(10000)
+        this.timeout(100000)
         const reqBody = JSON.stringify({"firstName":"Tony","lastName":"Stark","username":"tony@stark.com","password":"ironman"})
         chai.request(app)
             .post('/create/newUser', reqBody, {
@@ -25,7 +25,7 @@ describe("Login (API)", function() {
             })
     });
     it('Should login.', function(done) {
-        this.timeout(10000)
+        this.timeout(100000)
         chai.request(app)
             .post('/auth/login', {
                 withCredentials: true,
