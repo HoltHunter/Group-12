@@ -57,3 +57,19 @@ describe("Login (API)", function() {
             })
     });
 })
+
+
+describe("Search for Users", function() {
+    it('Should return a list of users.', function(done) {
+        chai.request(app)
+            .get('/search/users', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",}
+            })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                console.log(res.body)
+                done()
+            })
+    });
+})
