@@ -43,6 +43,7 @@ router
     .post('/acceptFriendRequest', async (req, res) => {
 		const client = await pool.connect()
 		try {
+			console.log(req.body)
 			const decision = req.body.decision
 			const request_id = req.body.request_id
 			await client.query(`
