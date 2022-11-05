@@ -120,7 +120,7 @@ describe("Make Friends", function() {
                 withCredentials: true,
                 headers: {"Content-Type": "application/json"}
             })
-            .send({ requestId: 1, decision: true })
+            .send({ "request_id": 1, "decision": true })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
