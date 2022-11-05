@@ -46,6 +46,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            sleep 10000
             cd server
             pnpm test
       - save_cache:
