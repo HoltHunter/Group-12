@@ -104,7 +104,7 @@ describe("Search for Users", function() {
 describe("Make Friends", function() {
     it('Should create a friend request', function(done) {
         chai.request(app)
-            .post('/create/friendRequests', {
+            .post('/create/friendRequest', {
                 withCredentials: true,
                 headers: {"Content-Type": "application/json"}
             })
@@ -116,7 +116,7 @@ describe("Make Friends", function() {
     })
     it('Should accept a friend request', function(done) {
         chai.request(app)
-            .post('/create/acceptFriendRequests', {
+            .post('/create/acceptFriendRequest', {
                 withCredentials: true,
                 headers: {"Content-Type": "application/json"}
             })
