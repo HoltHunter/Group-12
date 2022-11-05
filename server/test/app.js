@@ -15,7 +15,7 @@ const baseUrl = 'http://localhost:8081'
 
 
 
-setup.connect()
+await setup.connect()
 
 
 describe("Login (API)", function() {
