@@ -2,8 +2,6 @@ const migrate = require("postgres-migrations");
 
 // exports.connect = async (pool, path) => {
 exports.connect = async () => {
-    console.log("I'm setting up the db, maybe.")
-
     const dbConfig = {
         database: "cse_database",
         user: "cse_username",
@@ -22,4 +20,5 @@ exports.connect = async () => {
 
     // await migrate.migrate(pool, path)
     await migrate.migrate(dbConfig, "./migrations")
+    console.log("I'm after the migrate.")
 }

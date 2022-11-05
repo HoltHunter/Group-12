@@ -13,9 +13,7 @@ const baseUrl = 'http://localhost:8081'
 
 /* NOTE: You must be running the app server for these tests to pass. */
 
-
-
-await setup.connect()
+setup.connect()
 
 
 describe("Login (API)", function() {
