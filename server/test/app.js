@@ -20,12 +20,12 @@ setup.connect()
 
 describe("Login (API)", function() {
     it('Should create a new user.', function(done) {
-        const reqBody = JSON.stringify({"firstName":"Tony","lastName":"Stark","username":"tony@stark.com","password":"ironman"})
         chai.request(app)
-            .post('/create/newUser', reqBody, {
+            .post('/create/newUser', {
                 withCredentials: true,
                 headers: {"Content-Type": "application/json",}
             })
+            .send({"firstName":"Tony","lastName":"Stark","username":"tony@stark.com","password":"ironman"})
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
