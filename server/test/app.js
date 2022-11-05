@@ -54,19 +54,6 @@ before("setup db", async () => {
                 done()
             })
     });
-
-    it('Should create a friend request', function(done) {
-        chai.request(app)
-            .post('/create/friendRequest', {
-                withCredentials: true,
-                headers: {"Content-Type": "application/json"}
-            })
-            .send({ "fromId": 1, "toId": 2 })
-            .end((err, res) => {
-                assert.equal(200, res.status)
-                done()
-            })
-    })
 })
 
 
@@ -115,6 +102,18 @@ describe("Search for Users", function() {
 })
 
 describe("Make Friends", function() {
+    it('Should create a friend request', function(done) {
+        chai.request(app)
+            .post('/create/friendRequest', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "fromId": 1, "toId": 2 })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
     it('Should accept a friend request', function(done) {
         chai.request(app)
             .post('/create/acceptFriendRequest', {
