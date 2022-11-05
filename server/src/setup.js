@@ -20,4 +20,5 @@ exports.connect = async () => {
 
     // await migrate.migrate(pool, path)
     await migrate.migrate(dbConfig, "./migrations")
+    console.log("I'm after the migrate.")
 }

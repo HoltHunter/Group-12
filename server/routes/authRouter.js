@@ -18,6 +18,7 @@ router
       	}
   	})
   	.post("/login", async (req, res) => {
+		console.log(req.body)
       	const formData = req.body;
       	formSchema
           	.validate(formData)

@@ -17,23 +17,9 @@ const createRouter = require("./routes/createRouter");
 
 
 setup.connect()
-const jsonParser = bodyParser.json()
-
 
 require("dotenv").config();
 
-//web server that socket io is hosted on
-const io = new Server(server, {
-    //specify which domain this server will be talking to
-    cors: {
-        //location of application server front end
-        origin: "http://localhost:3000",
-        //cross site cookies sent over
-        credentials: "true",
-    },
-});
-
-app.use(helmet());
 app.use(cors({
     origin: "http://localhost:3000",  
     credentials: true,
@@ -64,9 +50,6 @@ app.use(
 app.use("/auth", authRouter);
 app.use("/search", searchRouter);
 app.use("/create", createRouter);
-
-//socket recieves a connection and runs the callback
-io.on("connect", socket => {});
 
 //listening on port 5000
 server.listen(8081, () => {

@@ -17,8 +17,16 @@ jobs:
   run-tests:
     docker:
       - image: node:18
+      - image: cimg/postgres:14.0
+        auth: 
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
+        environment:
+          POSTGRES_DB: cse_database
+          POSTGRES_USER: cse_username
+          POSTGRES_PASSWORD: cse_password
     resource_class: large
-    parallelism: 10
+    parallelism: 1
     steps:
       - checkout
       - restore_cache:
@@ -38,6 +46,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            sleep 10
             cd server
             pnpm test
       - save_cache:
