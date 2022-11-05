@@ -89,10 +89,11 @@ describe("Login (API)", function() {
 describe("Search for Users", function() {
     it('Should return a list of users.', function(done) {
         chai.request(app)
-            .get('/search/users', {
+            .post('/search/users', {
                 withCredentials: true,
                 headers: {"Content-Type": "application/json",}
             })
+            .send({ userId: 1 })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 console.log(res.body)
