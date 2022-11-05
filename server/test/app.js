@@ -4,6 +4,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 let app = require('../app')
 const setup = require('../src/setup')
+const before = require('mocha').before
 
 
 chai.use(chaiHttp)
@@ -12,7 +13,7 @@ const baseUrl = 'http://localhost:8081'
 
 /* NOTE: You must be running the app server for these tests to pass. */
 
-chai.before("setup db", async () => {
+before("setup db", async () => {
     await setup.connect()
 })
 
