@@ -3,7 +3,6 @@ const assert = require('chai').assert;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 let app = require('../app')
-const before = require('chai').before
 const setup = require('../src/setup')
 
 
@@ -13,7 +12,7 @@ const baseUrl = 'http://localhost:8081'
 
 /* NOTE: You must be running the app server for these tests to pass. */
 
-before(async () => {
+chai.before(async () => {
     await setup.connect()
 })
 
