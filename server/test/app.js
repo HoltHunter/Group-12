@@ -15,10 +15,7 @@ const baseUrl = 'http://localhost:8081'
 
 before("setup db", async () => {
     await setup.connect()
-})
 
-
-describe("Login (API)", function() {
     it('Should create a new user.', function(done) {
         chai.request(app)
             .post('/create/newUser', {
@@ -31,6 +28,36 @@ describe("Login (API)", function() {
                 done()
             })
     });
+
+    it('Should create a new user.', function(done) {
+        chai.request(app)
+            .post('/create/newUser', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",}
+            })
+            .send({"firstName":"Steve","lastName":"Rogers","username":"steve@rogers.com","password":"captainamerica"})
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    });
+
+    it('Should create a new user.', function(done) {
+        chai.request(app)
+            .post('/create/newUser', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",}
+            })
+            .send({"firstName":"Thor","lastName":"Odinson","username":"thor@odinson.com","password":"strongestavenger"})
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    });
+})
+
+
+describe("Login (API)", function() {
     it('Should login.', function(done) {
         chai.request(app)
             .post('/auth/login', {
