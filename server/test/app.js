@@ -12,7 +12,7 @@ const baseUrl = 'http://localhost:8081'
 
 /* NOTE: You must be running the app server for these tests to pass. */
 
-chai.before(async () => {
+chai.before("setup db", async () => {
     await setup.connect()
 })
 
