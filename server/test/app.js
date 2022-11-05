@@ -127,3 +127,73 @@ describe("Make Friends", function() {
             })
     })
 })
+
+
+describe("Make Post & Comment", function() {
+    it('Should create a post', function(done) {
+        chai.request(app)
+            .post('/create/newPost', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "userId": 2, "postContent": "I am Steve Rogers." })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it('Should comment on the post', function(done) {
+        chai.request(app)
+            .post('/create/post/comment', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "userId": 1, "postId": 1, "comment": "Can you believe this guy?" })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it('Should like the post', function(done) {
+        chai.request(app)
+            .post('/create/likes', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "userId": 3, "postId": 1 })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+})
+
+
+describe("View Posts", function() {
+    it('View posts', function(done) {
+        chai.request(app)
+            .post('/search/posts', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "userId": 1 })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                console.log(res.body)
+                done()
+            })
+    })
+    it('View post comments', function(done) {
+        chai.request(app)
+            .post('/search/posts/2/comments/1', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                console.log(res.body)
+                done()
+            })
+    })
+})
+
