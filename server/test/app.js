@@ -126,6 +126,31 @@ describe("Make Friends", function() {
                 done()
             })
     })
+
+    it('Should create a friend request', function(done) {
+        chai.request(app)
+            .post('/create/friendRequest', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "fromId": 1, "toId": 3 })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it('Should accept a friend request', function(done) {
+        chai.request(app)
+            .post('/create/acceptFriendRequest', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "request_id": 2, "decision": true })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
 })
 
 
@@ -161,6 +186,18 @@ describe("Make Post & Comment", function() {
                 headers: {"Content-Type": "application/json"}
             })
             .send({ "userId": 3, "postId": 1 })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it('Should share a post', function(done) {
+        chai.request(app)
+            .post('/create/newPost', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "userId": 3, "postContent": "See how the mortals introduce themselves? So formal.", "sharedPostId": 1 })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
