@@ -168,5 +168,35 @@ router
 			client.release()
 		}
     })
+	.patch('/settings/:id', async (req, res) => {
+		const client = await pool.connect()
+		try {
+			const settings = req.body.settings
+			let { id } = req.params   // Pull id from URL parameter
+			
+			if (settings.icon) {
+				await client.query(`
+					UPDATE users
+					SET profile_icon = '${ settings.icon }'
+					WHERE id = ${ id }
+					;
+				`)
+			}
+			if (settings.theme) {
+				await client.query(`
+					UPDATE users
+					SET theme = '${ settings.theme }'
+					WHERE id = ${ id }
+					;
+				`)
+			}
+			
+			res.send("Success")
+		} catch (err) {
+			console.log(err.stack)
+		} finally {
+			client.release()
+		}
+	})
 
 module.exports = router;
