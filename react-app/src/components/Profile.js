@@ -4,6 +4,7 @@ import { useState } from 'react'
 import axios from "../apis/coreApp";
 import { useParams } from "react-router-dom";
 import CreatePost from "./CreatePost";
+import { Link } from "react-router-dom";
 
 // TODO:
 // Can we reuse a Comment component to also make new posts?
@@ -53,7 +54,11 @@ const Profile = ({ session }) => {
 
     return (
         <div className="ui container">
-            <h1>{ userInfo && userInfo.first_name } { userInfo && userInfo.last_name }</h1>
+            <h1>{ userInfo && userInfo.first_name } { userInfo && userInfo.last_name }
+            <Link to="/settings" className="item">
+                <i className="cog icon" />
+            </Link>
+            </h1>
             <h4>{ userInfo && userInfo.is_friend }</h4>
             { session.userId == id && <div className="ui comments">
                 <CreatePost

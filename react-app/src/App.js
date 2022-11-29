@@ -6,6 +6,7 @@ import SearchView from "./components/SearchView";
 import Header from "./components/Header";
 import Profile from "./components/Profile";
 import HomeFeed from "./components/HomeFeed";
+import Settings from "./components/Settings";
 import { Navigate } from "react-router-dom";
 
 const App = () => {
@@ -52,6 +53,9 @@ const App = () => {
 				/>
 				<Route path='/profile/:id' 
 					element={ isAuthenticated ? <Profile session={ session } /> : <Navigate to="/" /> } 
+				/>
+				<Route path='/settings' 
+					element={ isAuthenticated ? <Settings session={ session } setSession={ setSessionAndAuth }/> : <Navigate to="/" /> } 
 				/>
 			</Routes>
 		</div>
