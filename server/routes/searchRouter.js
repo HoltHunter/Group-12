@@ -24,7 +24,7 @@ router
         try {
             const userId = req.body.userId
             const result = await client.query(`
-                SELECT u.id, u.first_name, u.last_name, 
+                SELECT u.id, u.first_name, u.last_name, u.profile_icon,
                     CASE WHEN ${ userId } < u.id AND f.user_id = ${ userId } THEN true 
                          WHEN ${ userId } > u.id AND f2.other_user_id = ${ userId } THEN true 
                         ELSE false 
@@ -51,7 +51,7 @@ router
             const userId = req.body.userId
             let { id } = req.params   // Pull id from URL parameter
             const result = await client.query(`
-                SELECT u.id, u.first_name, u.last_name, 
+                SELECT u.id, u.first_name, u.last_name, u.profile_icon,
                     CASE WHEN ${ userId } < u.id AND f.user_id = ${ userId } THEN true 
                          WHEN ${ userId } > u.id AND f2.other_user_id = ${ userId } THEN true 
                         ELSE false 
@@ -98,7 +98,7 @@ router
             const userId = req.body.userId
             let { id } = req.params   // Pull id from URL parameter
             const result = await client.query(`
-                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, 
+                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, u.profile_icon,
                     CASE WHEN l.user_id IS NOT NULL THEN true ELSE false END as liked,
                     p.shared_post_id, p.date_modified
                 FROM posts p
@@ -112,7 +112,7 @@ router
             const sharedPostIds = result.rows.map(post => post.shared_post_id).filter(val => val !== null)
             if (sharedPostIds[0]) {
                 const sharedPosts = await client.query(`
-                    SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, p.date_modified
+                    SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, p.date_modified, u.profile_icon
                     FROM posts p
                     JOIN users u ON p.user_id = u.id
                     WHERE p.id IN (${ "'" + sharedPostIds.join("','") + "'" })
@@ -143,7 +143,7 @@ router
             // const userId = req.body.userId
             let { postId } = req.params   // Pull id from URL parameter
             const result = await client.query(`
-                SELECT p.post_id, p.user_id, p.date_created, p.content, u.first_name, u.last_name
+                SELECT p.post_id, p.user_id, p.date_created, p.content, u.first_name, u.last_name, u.profile_icon
                 FROM post_comments p
                 JOIN users u ON p.user_id = u.id
                 WHERE p.post_id = ${ postId }
@@ -171,7 +171,7 @@ router
                 ;
             `)
             const result = await client.query(`
-                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, 
+                SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, u.profile_icon,
                     CASE WHEN l.user_id IS NOT NULL THEN true ELSE false END as liked,
                     p.shared_post_id, p.date_modified
                 FROM posts p
@@ -185,7 +185,7 @@ router
             const sharedPostIds = result.rows.map(post => post.shared_post_id).filter(val => val !== null)
             if (sharedPostIds[0]) {
                 const sharedPosts = await client.query(`
-                    SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name
+                    SELECT p.id, p.date_created, p.user_id, p.content, p.likes_count, u.first_name, u.last_name, u.profile_icon
                     FROM posts p
                     JOIN users u ON p.user_id = u.id
                     WHERE p.id IN (${ "'" + sharedPostIds.join("','") + "'" })
