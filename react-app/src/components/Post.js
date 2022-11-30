@@ -76,7 +76,7 @@ const Post = ({post, session}) => {
         return (
             <div className="ui centered fluid card">
                 <div className="content">
-                    <div className="right floated meta">{ new Date(sharedPost.date_created).toLocaleString() }</div>
+                    <div className="right floated meta"><p className="date">{ new Date(sharedPost.date_created).toLocaleString() }</p></div>
                     <div className="header">
                         <Link to={`/profile/${ sharedPost.user_id }`} >
                             <img className="ui avatar image" src={sharedPost.profile_icon + ".png"}/>
@@ -100,7 +100,7 @@ const Post = ({post, session}) => {
         <div className="ui centered fluid grey card">
             <div className="content">
                 <div className="right floated meta">
-                    { getDate() }
+                    <p className="date">{ getDate() }</p>
                     { post.user_id === session.userId && <i className="edit icon" onClick={ () => toggleEditMode(post.content) }/>}
                 </div>
                 <div className="header">

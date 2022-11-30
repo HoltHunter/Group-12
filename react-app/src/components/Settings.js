@@ -45,16 +45,16 @@ const Settings = ({ session, setSession }) => {
     return (
         <div className="ui container">
             <div className="ui verticle stripe segment">
-                <h3>{userTheme}</h3>
+                <h3>Choose your theme: {userTheme}</h3>
                 <div className="ui buttons">
                     <button className={ userTheme == "classic" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("classic", e)}>Classic</button>
                     <button className={ userTheme == "dark" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("dark", e)}>Dark</button>
-                    <button className={ userTheme == "bright" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("bright", e)}>Bright</button>
-                <button className={ userTheme == "monochrome" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("monochrome", e)}>Monochrome</button>
+                    <button className={ userTheme == "monochrome" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("monochrome", e)}>Monochrome</button>
                 </div>
             </div>
             <div className="ui verticle stripe segment">
-                <img className="ui avatar image" src={session.icon + ".png"}/>
+                <h3>Choose a profile icon:</h3>
+                <img className="ui small image" src={session.icon + ".png"}/>
                 <div className="ui tiny images">
                     <div className={ userIcon == "alpha" ? "ui basic primary button active" : "ui basic button"} onClick={(e) => changeProfilePic("alpha", e)}><img className="ui image" src="alpha.png"/></div>
                     

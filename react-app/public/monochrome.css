@@ -1,0 +1,95 @@
+body {
+    background-color: white;
+}
+
+a {
+    color: rgb(0, 0, 0);
+}
+
+a:hover {
+    color: rgb(26, 26, 26);
+}
+
+.ui.secondary.menu {
+    background-color: #3F3E3F;
+    color: white;
+}
+
+.ui.button.primary {
+    background-color: #000000;
+}
+
+.ui.button.primary:hover {
+    background-color: #2b2b2b;
+}
+
+div {
+    color: black;
+}
+
+.ui.fluid.card {
+    background-color:#bebebe;
+    box-shadow: none;
+}
+
+.ui.fluid.card:hover {
+    background-color:#bebebe;
+    box-shadow: none;
+}
+
+.ui.grey.card {
+    background-color:#d4d4d4;
+    box-shadow: none;
+}
+
+.ui.grey.card:hover {
+    background-color:#d4d4d4;
+    box-shadow: none;
+}
+
+
+
+.date {
+    color: #C9C9C9;
+}
+
+.ui.verticle.stripe.segment {
+    background-color: #d4d4d4;
+}
+
+.ui.button:hover {
+    background-color: #202020;
+    color: white;
+}
+
+.ui.button {
+    background-color: #000000;
+    color: white;
+}
+
+.ui.button.negative:hover {
+    background-color: #202020;
+    color: white;
+}
+
+.ui.button.negative {
+    background-color: #000000;
+    color: white;
+}
+
+.ui.input {
+    background-color: black;
+}
+
+.labels {
+    color: white;
+}
+
+h1, h4 {
+    color: rgb(17, 17, 17);
+}
+
+i.red.icon {
+    color: white !important;
+}
+
