@@ -1,0 +1,78 @@
+body {
+    background-color: black;
+}
+
+a {
+    color: grey;
+}
+
+.ui.secondary.menu {
+    background-color: #3F3E3F;
+    color: white;
+}
+
+.ui.button.primary {
+    background-color: #10403B;
+}
+
+.ui.button.primary:hover {
+    background-color: #0c2e2a;
+}
+
+div {
+    color: white;
+}
+
+.ui.fluid.card {
+    background-color:#333333;
+    box-shadow: none;
+}
+
+.ui.fluid.card:hover {
+    background-color:#333333;
+    box-shadow: none;
+}
+
+.ui.grey.card {
+    background-color:#262626;
+    box-shadow: none;
+}
+
+.ui.grey.card:hover {
+    background-color:#262626;
+    box-shadow: none;
+}
+
+
+
+.date {
+    color: #C9C9C9;
+}
+
+.ui.verticle.stripe.segment {
+    background-color: #262626;
+}
+
+.ui.button:hover {
+    background-color: #254141;
+    color: white;
+}
+
+.ui.button {
+    background-color: #315353;
+    color: white;
+}
+
+.ui.input {
+    background-color: black;
+}
+
+.labels {
+    color: white;
+}
+
+h1 {
+    color: darkgray;
+}
+
+

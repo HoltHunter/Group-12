@@ -12,6 +12,7 @@ import { Navigate } from "react-router-dom";
 const App = () => {
 	const [session, setSession] = useState(null)
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
+	const [theme, setTheme] = useState(null)
 
 	useEffect(() => {
 		requireAuth()
@@ -23,6 +24,7 @@ const App = () => {
 	}
 
 	const setSessionAndAuth = (data) => {
+		setTheme(data.theme)
 		setSession(data)
 		setIsAuthenticated(true)
 	}
@@ -40,7 +42,9 @@ const App = () => {
 
 	return (
 		<div>
+			
 			{ session && isAuthenticated && <Header session={ session } signOut={ signOut } />}
+			<link rel="stylesheet" href={session ? theme + ".css" : ""} />
 			<Routes>
 				<Route path='/' 
 					element={<Login setSession={ setSessionAndAuth } />} 

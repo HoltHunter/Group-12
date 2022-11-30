@@ -51,18 +51,18 @@ const Header = (session, signOut) => {
         <div className="ui secondary pointing menu">
             <Link to="/home" className="item">
                 <i className="home icon" />
-                Home
+                <p className="labels">Home</p>
             </Link>
             
             <Link to="/search" className="item">
                 <i className="search icon" />
-                Search Users
+                <p className="labels">Search Users</p>
             </Link>
 
             { session && 
             <Link to={`/profile/${ session.session.userId }`} className="item">
                 <i className="user circle icon" />
-                View Profile
+                <p className="labels">View Profile</p>
             </Link>}
 
             { session &&
