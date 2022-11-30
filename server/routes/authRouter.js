@@ -35,6 +35,10 @@ router
 		console.log(result.rows[0])
 		if (result.rows.length === 1) {
 			res.statusCode = 200
+			req.session.user = {
+				username: req.body.username,
+				id: result.rows[0].id,
+			};
 			res.json({ 
 				loggedIn: true, 
 				username: username, 
