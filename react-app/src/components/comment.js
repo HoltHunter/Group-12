@@ -9,7 +9,7 @@ const Comment = ({comment}) => {
   return (
     <div className="comment">
       <a className="avatar">
-        <img src={"https://i.pravatar.cc/300?u=" + comment.user_id}/>
+      <img className="" src={comment.profile_icon + ".png"}/>
       </a>
       <div className="content">
         <Link to={`/profile/${ comment.user_id }`} className="author">
