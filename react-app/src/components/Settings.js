@@ -49,8 +49,7 @@ const Settings = ({ session, setSession }) => {
                 <div className="ui buttons">
                     <button className={ userTheme == "classic" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("classic", e)}>Classic</button>
                     <button className={ userTheme == "dark" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("dark", e)}>Dark</button>
-                    <button className={ userTheme == "bright" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("bright", e)}>Bright</button>
-                <button className={ userTheme == "monochrome" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("monochrome", e)}>Monochrome</button>
+                    <button className={ userTheme == "monochrome" ? "ui button active" : "ui button"} onClick={(e) => changeTheme("monochrome", e)}>Monochrome</button>
                 </div>
             </div>
             <div className="ui verticle stripe segment">
