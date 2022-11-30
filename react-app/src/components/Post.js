@@ -79,6 +79,7 @@ const Post = ({post, session}) => {
                     <div className="right floated meta">{ new Date(sharedPost.date_created).toLocaleString() }</div>
                     <div className="header">
                         <Link to={`/profile/${ sharedPost.user_id }`} >
+                            <img className="ui avatar image" src={sharedPost.profile_icon + ".png"}/>
                             { sharedPost.first_name }
                         </Link>
                     </div>
@@ -104,6 +105,7 @@ const Post = ({post, session}) => {
                 </div>
                 <div className="header">
                     <Link to={`/profile/${ post.user_id }`} >
+                        <img className="ui avatar image" src={post.profile_icon + ".png"}/>
                         { post.first_name }
                     </Link>
                 </div>
