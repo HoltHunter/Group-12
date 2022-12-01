@@ -247,7 +247,7 @@ describe("Check User Properties", function() {
             })
             .send({"username":"tony@stark.com","password":"ironman"})
             .end((err, res) => {
-                console.log(res.body[0])
+                console.log(res.body.profile_icon)
                 assert.equal("alpha", res.body.profile_icon)
                 done()
             })
@@ -260,7 +260,7 @@ describe("Check User Properties", function() {
             })
             .send({"username":"tony@stark.com","password":"ironman"})
             .end((err, res) => {
-                console.log(res.body[0])
+                console.log(res.body.theme)
                 assert.equal("classic", res.body.theme)
                 done()
             })
