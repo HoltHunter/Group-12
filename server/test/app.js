@@ -70,7 +70,6 @@ describe("Login (API)", () => {
             })
             .send({ username: "tony@stark.com", password: "ironman" })
             .end((err, res) => {
-                // console.log(res)
                 assert.equal(200, res.status)
                 done()
             })
@@ -82,7 +81,6 @@ describe("Login (API)", () => {
                 headers: { "Content-Type": "application/json" },
             })
             .end((err, res) => {
-                // console.log(res)
                 assert.equal(200, res.status)
                 done()
             })
@@ -268,7 +266,6 @@ describe("View Posts", () => {
             .send({ userId: 1 })
             .end((err, res) => {
                 assert.equal(200, res.status)
-                console.log(res.body)
                 done()
             })
     })
@@ -280,7 +277,6 @@ describe("View Posts", () => {
             })
             .end((err, res) => {
                 assert.equal(200, res.status)
-                console.log(res.body)
                 done()
             })
     })
