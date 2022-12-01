@@ -1,20 +1,18 @@
-import React from "react";
-import UserCard from './UserCard'
+import React from "react"
+import UserCard from "./UserCard"
 
-const UserList = ({ data, onRequest }) => {
+function UserList({ data, onRequest }) {
     return (
         <div className="ui relaxed divided list">
-            { 
-                data.map((user) => {
-                    return (
-                        <div key={ user.id } className="item">
-                            <UserCard 
-                                user={ user } 
-                                onRequest={ onRequest }
-                            />
-                        </div>
-                    )
-                })
+            {
+                data.map((user) => (
+                    <div key={user.id} className="item">
+                        <UserCard
+                            user={user}
+                            onRequest={onRequest}
+                        />
+                    </div>
+                ))
             }
         </div>
     )

@@ -1,4 +1,4 @@
-const createPosts = require('./helpers/create-posts-table')
+const createPosts = require("./helpers/create-posts-table")
 
 module.exports.generateSql = () => `
     ${createPosts}

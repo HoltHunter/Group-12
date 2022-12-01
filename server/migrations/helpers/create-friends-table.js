@@ -6,4 +6,3 @@ module.exports = `
         date_created timestamptz not null default CURRENT_TIMESTAMP
     );
 `
-
