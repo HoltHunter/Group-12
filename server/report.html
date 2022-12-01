@@ -397,7 +397,7 @@
 	<div class="container">
 		<div id="summary">
 			<h2 class="page-header">Summary</h2>
-			<div>105 problems (84 errors, 21 warnings)</div>
+			<div>106 problems (85 errors, 21 warnings)</div>
 			<div class="row"><div class="column">
 	<h3 class="text-error">Top errors</h3>
 	<table class="summary-table"><thead>
@@ -5673,7 +5673,7 @@
 	</td>
 </tr>
 
-<tr id="usersJoelhuberVaporCse6214Group12ServerTestAppJs" class="lint-result bg-error" data-group="f-28" data-problem-count="4" tabindex="0">
+<tr id="usersJoelhuberVaporCse6214Group12ServerTestAppJs" class="lint-result bg-error" data-group="f-28" data-problem-count="5" tabindex="0">
     <th class="icon-box" colspan="1">
         <span class="caret"></span>
     </th>
@@ -5681,7 +5681,7 @@
         /test/app.js
     </th>
     <th class="result-summary">
-      4 problems (2 errors, 2 warnings)
+      5 problems (3 errors, 2 warnings)
     </th>
 </tr>
 <tr class="f-28 hidden">
@@ -5733,15 +5733,21 @@
 		<a href="http://eslint.org/docs/rules/no-unused-vars" target="_blank">no-unused-vars</a>
 	</td>
 </tr><tr class="issue">
+	<td><strong class="text-error">Error<strong></td>
+	<td>
+		Row 210, Column 1: "More than 1 blank line not allowed."
+		<a href="http://eslint.org/docs/rules/no-multiple-empty-lines" target="_blank">no-multiple-empty-lines</a>
+	</td>
+</tr><tr class="issue">
 	<td><strong class="text-warning">Warning<strong></td>
 	<td>
-		Row 220, Column 17: "Unexpected console statement."
+		Row 271, Column 17: "Unexpected console statement."
 		<a href="http://eslint.org/docs/rules/no-console" target="_blank">no-console</a>
 	</td>
 </tr><tr class="issue">
 	<td><strong class="text-warning">Warning<strong></td>
 	<td>
-		Row 232, Column 17: "Unexpected console statement."
+		Row 283, Column 17: "Unexpected console statement."
 		<a href="http://eslint.org/docs/rules/no-console" target="_blank">no-console</a>
 	</td>
 </tr>
@@ -6815,65 +6821,65 @@
 	<td class="source"><code></code></td>
 </tr>
 
-<tr class="hit bg-success">
+<tr class="issue">
+	<td><strong class="text-error">Error<strong></td>
+	<td>
+		Row 210, Column 1: "More than 1 blank line not allowed."
+		<a href="http://eslint.org/docs/rules/no-multiple-empty-lines" target="_blank">no-multiple-empty-lines</a>
+	</td>
+</tr><tr class="hit bg-error">
 	<td class="line">210</td>
-	<td class="source"><code>describe("View Posts", () =&#62; {</code></td>
+	<td class="source"><code></code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">211</td>
-	<td class="source"><code>    it("View posts", (done) =&#62; {</code></td>
+	<td class="source"><code>describe("Check User Properties", () =&#62; {</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">212</td>
-	<td class="source"><code>        chai.request(app)</code></td>
+	<td class="source"><code>    it("Correct theme for logged in user", (done) =&#62; {</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">213</td>
-	<td class="source"><code>            .post("/search/posts", {</code></td>
+	<td class="source"><code>        chai.request(app)</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">214</td>
-	<td class="source"><code>                withCredentials: true,</code></td>
+	<td class="source"><code>            .post("/auth/login", {</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">215</td>
-	<td class="source"><code>                headers: { "Content-Type": "application/json" },</code></td>
+	<td class="source"><code>                withCredentials: true,</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">216</td>
-	<td class="source"><code>            })</code></td>
+	<td class="source"><code>                headers: { "Content-Type": "application/json" },</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">217</td>
-	<td class="source"><code>            .send({ userId: 1 })</code></td>
+	<td class="source"><code>            })</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">218</td>
-	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
+	<td class="source"><code>            .send({ username: "tony@stark.com", password: "ironman" })</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">219</td>
-	<td class="source"><code>                assert.equal(200, res.status)</code></td>
+	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
 </tr>
 
-<tr class="issue">
-	<td><strong class="text-warning">Warning<strong></td>
-	<td>
-		Row 220, Column 17: "Unexpected console statement."
-		<a href="http://eslint.org/docs/rules/no-console" target="_blank">no-console</a>
-	</td>
-</tr><tr class="hit bg-warning">
+<tr class="hit bg-success">
 	<td class="line">220</td>
-	<td class="source"><code>                console.log(res.body)</code></td>
+	<td class="source"><code>                assert.equal("classic", res.body.theme)</code></td>
 </tr>
 
 <tr class="hit bg-success">
@@ -6893,7 +6899,7 @@
 
 <tr class="hit bg-success">
 	<td class="line">224</td>
-	<td class="source"><code>    it("View post comments", (done) =&#62; {</code></td>
+	<td class="source"><code>    it("Correct icon for logged in user", (done) =&#62; {</code></td>
 </tr>
 
 <tr class="hit bg-success">
@@ -6903,7 +6909,7 @@
 
 <tr class="hit bg-success">
 	<td class="line">226</td>
-	<td class="source"><code>            .post("/search/posts/2/comments/1", {</code></td>
+	<td class="source"><code>            .post("/auth/login", {</code></td>
 </tr>
 
 <tr class="hit bg-success">
@@ -6923,23 +6929,17 @@
 
 <tr class="hit bg-success">
 	<td class="line">230</td>
-	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
+	<td class="source"><code>            .send({ username: "tony@stark.com", password: "ironman" })</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">231</td>
-	<td class="source"><code>                assert.equal(200, res.status)</code></td>
+	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
 </tr>
 
-<tr class="issue">
-	<td><strong class="text-warning">Warning<strong></td>
-	<td>
-		Row 232, Column 17: "Unexpected console statement."
-		<a href="http://eslint.org/docs/rules/no-console" target="_blank">no-console</a>
-	</td>
-</tr><tr class="hit bg-warning">
+<tr class="hit bg-success">
 	<td class="line">232</td>
-	<td class="source"><code>                console.log(res.body)</code></td>
+	<td class="source"><code>                assert.equal("alpha", res.body.icon)</code></td>
 </tr>
 
 <tr class="hit bg-success">
@@ -6959,11 +6959,473 @@
 
 <tr class="hit bg-success">
 	<td class="line">236</td>
-	<td class="source"><code>})</code></td>
+	<td class="source"><code>    it("Correct icon on user post", (done) =&#62; {</code></td>
 </tr>
 
 <tr class="hit bg-success">
 	<td class="line">237</td>
+	<td class="source"><code>        chai.request(app)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">238</td>
+	<td class="source"><code>            .post("/search/posts", {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">239</td>
+	<td class="source"><code>                withCredentials: true,</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">240</td>
+	<td class="source"><code>                headers: { "Content-Type": "application/json" },</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">241</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">242</td>
+	<td class="source"><code>            .send({ userId: 1 })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">243</td>
+	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">244</td>
+	<td class="source"><code>                assert.equal("alpha", res.body[0].profile_icon)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">245</td>
+	<td class="source"><code>                done()</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">246</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">247</td>
+	<td class="source"><code>    })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">248</td>
+	<td class="source"><code>    it("Correct icon on user comment", (done) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">249</td>
+	<td class="source"><code>        chai.request(app)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">250</td>
+	<td class="source"><code>            .post("/search/posts/2/comments/1", {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">251</td>
+	<td class="source"><code>                withCredentials: true,</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">252</td>
+	<td class="source"><code>                headers: { "Content-Type": "application/json" },</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">253</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">254</td>
+	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">255</td>
+	<td class="source"><code>                assert.equal("alpha", res.body[0].profile_icon)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">256</td>
+	<td class="source"><code>                done()</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">257</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">258</td>
+	<td class="source"><code>    })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">259</td>
+	<td class="source"><code>})</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">260</td>
+	<td class="source"><code></code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">261</td>
+	<td class="source"><code>describe("View Posts", () =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">262</td>
+	<td class="source"><code>    it("View posts", (done) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">263</td>
+	<td class="source"><code>        chai.request(app)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">264</td>
+	<td class="source"><code>            .post("/search/posts", {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">265</td>
+	<td class="source"><code>                withCredentials: true,</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">266</td>
+	<td class="source"><code>                headers: { "Content-Type": "application/json" },</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">267</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">268</td>
+	<td class="source"><code>            .send({ userId: 1 })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">269</td>
+	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">270</td>
+	<td class="source"><code>                assert.equal(200, res.status)</code></td>
+</tr>
+
+<tr class="issue">
+	<td><strong class="text-warning">Warning<strong></td>
+	<td>
+		Row 271, Column 17: "Unexpected console statement."
+		<a href="http://eslint.org/docs/rules/no-console" target="_blank">no-console</a>
+	</td>
+</tr><tr class="hit bg-warning">
+	<td class="line">271</td>
+	<td class="source"><code>                console.log(res.body)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">272</td>
+	<td class="source"><code>                done()</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">273</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">274</td>
+	<td class="source"><code>    })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">275</td>
+	<td class="source"><code>    it("View post comments", (done) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">276</td>
+	<td class="source"><code>        chai.request(app)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">277</td>
+	<td class="source"><code>            .post("/search/posts/2/comments/1", {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">278</td>
+	<td class="source"><code>                withCredentials: true,</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">279</td>
+	<td class="source"><code>                headers: { "Content-Type": "application/json" },</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">280</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">281</td>
+	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">282</td>
+	<td class="source"><code>                assert.equal(200, res.status)</code></td>
+</tr>
+
+<tr class="issue">
+	<td><strong class="text-warning">Warning<strong></td>
+	<td>
+		Row 283, Column 17: "Unexpected console statement."
+		<a href="http://eslint.org/docs/rules/no-console" target="_blank">no-console</a>
+	</td>
+</tr><tr class="hit bg-warning">
+	<td class="line">283</td>
+	<td class="source"><code>                console.log(res.body)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">284</td>
+	<td class="source"><code>                done()</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">285</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">286</td>
+	<td class="source"><code>    })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">287</td>
+	<td class="source"><code>})</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">288</td>
+	<td class="source"><code></code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">289</td>
+	<td class="source"><code>describe("Edit user properties", () =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">290</td>
+	<td class="source"><code>    it("Should change the icon", (done) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">291</td>
+	<td class="source"><code>        chai.request(app)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">292</td>
+	<td class="source"><code>            .patch("/create/settings/1", {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">293</td>
+	<td class="source"><code>                withCredentials: true,</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">294</td>
+	<td class="source"><code>                headers: { "Content-Type": "application/json" },</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">295</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">296</td>
+	<td class="source"><code>            .send({ settings: { icon: "beta" } })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">297</td>
+	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">298</td>
+	<td class="source"><code>                assert.equal(200, res.status)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">299</td>
+	<td class="source"><code>                done()</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">300</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">301</td>
+	<td class="source"><code>    })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">302</td>
+	<td class="source"><code>    it("Should change the theme", (done) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">303</td>
+	<td class="source"><code>        chai.request(app)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">304</td>
+	<td class="source"><code>            .patch("/create/settings/2", {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">305</td>
+	<td class="source"><code>                withCredentials: true,</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">306</td>
+	<td class="source"><code>                headers: { "Content-Type": "application/json" },</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">307</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">308</td>
+	<td class="source"><code>            .send({ settings: { theme: "dark" } })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">309</td>
+	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">310</td>
+	<td class="source"><code>                assert.equal(200, res.status)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">311</td>
+	<td class="source"><code>                done()</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">312</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">313</td>
+	<td class="source"><code>    })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">314</td>
+	<td class="source"><code>    it("Should change the icon and theme", (done) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">315</td>
+	<td class="source"><code>        chai.request(app)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">316</td>
+	<td class="source"><code>            .patch("/create/settings/3", {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">317</td>
+	<td class="source"><code>                withCredentials: true,</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">318</td>
+	<td class="source"><code>                headers: { "Content-Type": "application/json" },</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">319</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">320</td>
+	<td class="source"><code>            .send({ settings: { icon: "gamma", theme: "monochrome" } })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">321</td>
+	<td class="source"><code>            .end((err, res) =&#62; {</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">322</td>
+	<td class="source"><code>                assert.equal(200, res.status)</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">323</td>
+	<td class="source"><code>                done()</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">324</td>
+	<td class="source"><code>            })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">325</td>
+	<td class="source"><code>    })</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">326</td>
+	<td class="source"><code>})</code></td>
+</tr>
+
+<tr class="hit bg-success">
+	<td class="line">327</td>
 	<td class="source"><code></code></td>
 </tr>
 
