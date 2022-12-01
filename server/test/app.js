@@ -239,19 +239,6 @@ describe("View Posts", function() {
 
 
 describe("Check User Properties", function() {
-    it('Correct icon for logged in user', function(done) {
-        chai.request(app)
-            .post('/auth/login', {
-                withCredentials: true,
-                headers: {"Content-Type": "application/json",},
-            })
-            .send({"username":"tony@stark.com","password":"ironman"})
-            .end((err, res) => {
-                console.log(res.body.profile_icon)
-                assert.equal("alpha", res.body.profile_icon)
-                done()
-            })
-    });
     it('Correct theme for logged in user', function(done) {
         chai.request(app)
             .post('/auth/login', {
@@ -264,7 +251,20 @@ describe("Check User Properties", function() {
                 assert.equal("classic", res.body.theme)
                 done()
             })
-    });
+    })
+    it('Correct icon for logged in user', function(done) {
+        chai.request(app)
+            .post('/auth/login', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",},
+            })
+            .send({"username":"tony@stark.com","password":"ironman"})
+            .end((err, res) => {
+                console.log(res.body.profile_icon)
+                assert.equal("alpha", res.body.profile_icon)
+                done()
+            })
+    })
     it('Correct icon on user post', function(done) {
         chai.request(app)
             .post('/search/posts', {
