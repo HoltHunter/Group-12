@@ -242,7 +242,7 @@ describe("Edit user properties", function() {
                 withCredentials: true,
                 headers: {"Content-Type": "application/json"}
             })
-            .send({ "settings": {"icon": "bravo"} })
+            .send({"icon": "bravo"})
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
