@@ -241,9 +241,9 @@ describe("Edit user properties", function() {
                 withCredentials: true,
                 headers: {"Content-Type": "application/json"}
             })
-            .send({"settings" :{"icon": "bravo"} })
+            .send({"settings" :{"icon": "beta"} })
             .end((err, res) => {
-                assert.equal("bravo", res.body.icon)
+                assert.equal(200, res.status)
                 done()
             })
     })
@@ -253,7 +253,7 @@ describe("Edit user properties", function() {
                 withCredentials: true,
                 headers: {"Content-Type": "application/json"}
             })
-            .send({ "settings": {"theme": "dark"} })
+            .send({ "settings": { "theme": "dark" } })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
