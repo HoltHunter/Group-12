@@ -1,203 +1,154 @@
-const expect  = require('chai').expect;
-const assert = require('chai').assert;
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-let app = require('../app')
-const setup = require('../src/setup')
-const before = require('mocha').before
-
+const { expect } = require("chai")
+const { assert } = require("chai")
+const chai = require("chai")
+const chaiHttp = require("chai-http")
+const { before } = require("mocha")
+const app = require("../app")
+const setup = require("../src/setup")
 
 chai.use(chaiHttp)
 
-const baseUrl = 'http://localhost:8081'
+const baseUrl = "http://localhost:8081"
 
 /* NOTE: You must be running the app server for these tests to pass. */
 
 before("setup db", async () => {
     await setup.connect()
 
-    it('Should create a new user.', function(done) {
+    it("Should create a new user.", (done) => {
         chai.request(app)
-            .post('/create/newUser', {
+            .post("/create/newUser", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json",}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({"firstName":"Tony","lastName":"Stark","username":"tony@stark.com","password":"ironman"})
+            .send({
+                firstName: "Tony", lastName: "Stark", username: "tony@stark.com", password: "ironman",
+            })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
             })
-    });
+    })
 
-    it('Should create a new user.', function(done) {
+    it("Should create a new user.", (done) => {
         chai.request(app)
-            .post('/create/newUser', {
+            .post("/create/newUser", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json",}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({"firstName":"Steve","lastName":"Rogers","username":"steve@rogers.com","password":"captainamerica"})
+            .send({
+                firstName: "Steve", lastName: "Rogers", username: "steve@rogers.com", password: "captainamerica",
+            })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
             })
-    });
+    })
 
-    it('Should create a new user.', function(done) {
+    it("Should create a new user.", (done) => {
         chai.request(app)
-            .post('/create/newUser', {
+            .post("/create/newUser", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json",}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({"firstName":"Thor","lastName":"Odinson","username":"thor@odinson.com","password":"strongestavenger"})
+            .send({
+                firstName: "Thor", lastName: "Odinson", username: "thor@odinson.com", password: "strongestavenger",
+            })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
             })
-    });
+    })
 })
 
-
-describe("Login (API)", function() {
-    it('Should login.', function(done) {
+describe("Login (API)", () => {
+    it("Should login.", (done) => {
         chai.request(app)
-            .post('/auth/login', {
+            .post("/auth/login", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json",},
+                headers: { "Content-Type": "application/json" },
             })
-            .send({"username":"tony@stark.com","password":"ironman"})
+            .send({ username: "tony@stark.com", password: "ironman" })
             .end((err, res) => {
                 // console.log(res)
                 assert.equal(200, res.status)
                 done()
             })
-    });
-    it('Should logout.', function(done) {
+    })
+    it("Should logout.", (done) => {
         chai.request(app)
-            .post('/auth/logout', {
+            .post("/auth/logout", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json",},
+                headers: { "Content-Type": "application/json" },
             })
             .end((err, res) => {
                 // console.log(res)
                 assert.equal(200, res.status)
                 done()
             })
-    });
+    })
 })
 
-
-describe("Search for Users", function() {
-    it('Should return a list of users.', function(done) {
+describe("Search for Users", () => {
+    it("Should return a list of users.", (done) => {
         chai.request(app)
-            .post('/search/users', {
+            .post("/search/users", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json",}
+                headers: { "Content-Type": "application/json" },
             })
             .send({ userId: 1 })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
             })
-    });
-})
-
-describe("Make Friends", function() {
-    it('Should create a friend request', function(done) {
-        chai.request(app)
-            .post('/create/friendRequest', {
-                withCredentials: true,
-                headers: {"Content-Type": "application/json"}
-            })
-            .send({ "fromId": 1, "toId": 2 })
-            .end((err, res) => {
-                assert.equal(200, res.status)
-                done()
-            })
-    })
-    it('Should accept a friend request', function(done) {
-        chai.request(app)
-            .post('/create/acceptFriendRequest', {
-                withCredentials: true,
-                headers: {"Content-Type": "application/json"}
-            })
-            .send({ "request_id": 1, "decision": true })
-            .end((err, res) => {
-                assert.equal(200, res.status)
-                done()
-            })
-    })
-
-    it('Should create a friend request', function(done) {
-        chai.request(app)
-            .post('/create/friendRequest', {
-                withCredentials: true,
-                headers: {"Content-Type": "application/json"}
-            })
-            .send({ "fromId": 1, "toId": 3 })
-            .end((err, res) => {
-                assert.equal(200, res.status)
-                done()
-            })
-    })
-    it('Should accept a friend request', function(done) {
-        chai.request(app)
-            .post('/create/acceptFriendRequest', {
-                withCredentials: true,
-                headers: {"Content-Type": "application/json"}
-            })
-            .send({ "request_id": 2, "decision": true })
-            .end((err, res) => {
-                assert.equal(200, res.status)
-                done()
-            })
     })
 })
 
+describe("Make Friends", () => {
+    it("Should create a friend request", (done) => {
+        chai.request(app)
+            .post("/create/friendRequest", {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+            })
+            .send({ fromId: 1, toId: 2 })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it("Should accept a friend request", (done) => {
+        chai.request(app)
+            .post("/create/acceptFriendRequest", {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+            })
+            .send({ request_id: 1, decision: true })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
 
-describe("Make Post & Comment", function() {
-    it('Should create a post', function(done) {
+    it("Should create a friend request", (done) => {
         chai.request(app)
-            .post('/create/newPost', {
+            .post("/create/friendRequest", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json"}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({ "userId": 2, "postContent": "I am Steve Rogers." })
+            .send({ fromId: 1, toId: 3 })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
             })
     })
-    it('Should comment on the post', function(done) {
+    it("Should accept a friend request", (done) => {
         chai.request(app)
-            .post('/create/post/comment', {
+            .post("/create/acceptFriendRequest", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json"}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({ "userId": 1, "postId": 1, "comment": "Can you believe this guy?" })
-            .end((err, res) => {
-                assert.equal(200, res.status)
-                done()
-            })
-    })
-    it('Should like the post', function(done) {
-        chai.request(app)
-            .post('/create/likes', {
-                withCredentials: true,
-                headers: {"Content-Type": "application/json"}
-            })
-            .send({ "userId": 3, "postId": 1 })
-            .end((err, res) => {
-                assert.equal(200, res.status)
-                done()
-            })
-    })
-    it('Should share a post', function(done) {
-        chai.request(app)
-            .post('/create/newPost', {
-                withCredentials: true,
-                headers: {"Content-Type": "application/json"}
-            })
-            .send({ "userId": 3, "postContent": "See how the mortals introduce themselves? So formal.", "sharedPostId": 1 })
+            .send({ request_id: 2, decision: true })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
@@ -205,26 +156,76 @@ describe("Make Post & Comment", function() {
     })
 })
 
-
-describe("View Posts", function() {
-    it('View posts', function(done) {
+describe("Make Post & Comment", () => {
+    it("Should create a post", (done) => {
         chai.request(app)
-            .post('/search/posts', {
+            .post("/create/newPost", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json"}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({ "userId": 1 })
+            .send({ userId: 2, postContent: "I am Steve Rogers." })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it("Should comment on the post", (done) => {
+        chai.request(app)
+            .post("/create/post/comment", {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+            })
+            .send({ userId: 1, postId: 1, comment: "Can you believe this guy?" })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it("Should like the post", (done) => {
+        chai.request(app)
+            .post("/create/likes", {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+            })
+            .send({ userId: 3, postId: 1 })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it("Should share a post", (done) => {
+        chai.request(app)
+            .post("/create/newPost", {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+            })
+            .send({ userId: 3, postContent: "See how the mortals introduce themselves? So formal.", sharedPostId: 1 })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+})
+
+describe("View Posts", () => {
+    it("View posts", (done) => {
+        chai.request(app)
+            .post("/search/posts", {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+            })
+            .send({ userId: 1 })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 console.log(res.body)
                 done()
             })
     })
-    it('View post comments', function(done) {
+    it("View post comments", (done) => {
         chai.request(app)
-            .post('/search/posts/2/comments/1', {
+            .post("/search/posts/2/comments/1", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json"}
+                headers: { "Content-Type": "application/json" },
             })
             .end((err, res) => {
                 assert.equal(200, res.status)
@@ -234,38 +235,38 @@ describe("View Posts", function() {
     })
 })
 
-describe("Edit user properties", function() {
-    it('Should change the icon', function(done) {
+describe("Edit user properties", () => {
+    it("Should change the icon", (done) => {
         chai.request(app)
-            .patch('/settings/1', {
+            .patch("/create/settings/1", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json"}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({"settings" :{"icon": "beta"} })
+            .send({ settings: { icon: "beta" } })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
             })
     })
-    it('Should change the theme', function(done) {
+    it("Should change the theme", (done) => {
         chai.request(app)
-            .patch('/settings/2', {
+            .patch("/create/settings/2", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json"}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({ "settings": { "theme": "dark" } })
+            .send({ settings: { theme: "dark" } })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
             })
     })
-    it('Should change the icon and theme', function(done) {
+    it("Should change the icon and theme", (done) => {
         chai.request(app)
-            .patch('/settings/3', {
+            .patch("/create/settings/3", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json"}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({ "settings": {"icon": "gamma", "theme": "monochrome"} })
+            .send({ settings: { icon: "gamma", theme: "monochrome" } })
             .end((err, res) => {
                 assert.equal(200, res.status)
                 done()
@@ -273,51 +274,51 @@ describe("Edit user properties", function() {
     })
 })
 
-describe("Check User Properties", function() {
-    it('Correct theme for logged in user', function(done) {
+describe("Check User Properties", () => {
+    it("Correct theme for logged in user", (done) => {
         chai.request(app)
-            .post('/auth/login', {
+            .post("/auth/login", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json",},
+                headers: { "Content-Type": "application/json" },
             })
-            .send({"username":"tony@stark.com","password":"ironman"})
+            .send({ username: "tony@stark.com", password: "ironman" })
             .end((err, res) => {
                 assert.equal("classic", res.body.theme)
                 done()
             })
     })
-    it('Correct icon for logged in user', function(done) {
+    it("Correct icon for logged in user", (done) => {
         chai.request(app)
-            .post('/auth/login', {
+            .post("/auth/login", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json",},
+                headers: { "Content-Type": "application/json" },
             })
-            .send({"username":"tony@stark.com","password":"ironman"})
+            .send({ username: "tony@stark.com", password: "ironman" })
             .end((err, res) => {
                 assert.equal("alpha", res.body.icon)
                 done()
             })
     })
-    it('Correct icon on user post', function(done) {
+    it("Correct icon on user post", (done) => {
         chai.request(app)
-            .post('/search/posts', {
+            .post("/search/posts", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json"}
+                headers: { "Content-Type": "application/json" },
             })
-            .send({ "userId": 1 })
+            .send({ userId: 1 })
             .end((err, res) => {
-                assert.equal('alpha', res.body[0].profile_icon)
+                assert.equal("alpha", res.body[0].profile_icon)
                 done()
             })
     })
-    it('Correct icon on user comment', function(done) {
+    it("Correct icon on user comment", (done) => {
         chai.request(app)
-            .post('/search/posts/2/comments/1', {
+            .post("/search/posts/2/comments/1", {
                 withCredentials: true,
-                headers: {"Content-Type": "application/json"}
+                headers: { "Content-Type": "application/json" },
             })
             .end((err, res) => {
-                assert.equal('alpha', res.body[0].profile_icon)
+                assert.equal("alpha", res.body[0].profile_icon)
                 done()
             })
     })
