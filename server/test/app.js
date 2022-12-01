@@ -234,3 +234,42 @@ describe("View Posts", function() {
     })
 })
 
+
+describe("Edit user properties", function() {
+    it('Should change the icon', function(done) {
+        chai.request(app)
+            .patch('/settings/1', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "settings": {"icon": "bravo"} })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it('Should change the theme', function(done) {
+        chai.request(app)
+            .patch('/settings/2', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "settings": {"theme": "dark"} })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+    it('Should change the icon and theme', function(done) {
+        chai.request(app)
+            .patch('/settings/3', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "settings": {"icon": "gamma", "theme": "monochrome"} })
+            .end((err, res) => {
+                assert.equal(200, res.status)
+                done()
+            })
+    })
+})
