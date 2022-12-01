@@ -234,3 +234,56 @@ describe("View Posts", function() {
     })
 })
 
+
+
+
+
+describe("Check User Properties", function() {
+    it('Correct theme for logged in user', function(done) {
+        chai.request(app)
+            .post('/auth/login', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",},
+            })
+            .send({"username":"tony@stark.com","password":"ironman"})
+            .end((err, res) => {
+                assert.equal("classic", res.body.theme)
+                done()
+            })
+    })
+    it('Correct icon for logged in user', function(done) {
+        chai.request(app)
+            .post('/auth/login', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",},
+            })
+            .send({"username":"tony@stark.com","password":"ironman"})
+            .end((err, res) => {
+                assert.equal("alpha", res.body.icon)
+                done()
+            })
+    })
+    it('Correct icon on user post', function(done) {
+        chai.request(app)
+            .post('/search/posts', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "userId": 1 })
+            .end((err, res) => {
+                assert.equal('alpha', res.body[0].profile_icon)
+                done()
+            })
+    })
+    it('Correct icon on user comment', function(done) {
+        chai.request(app)
+            .post('/search/posts/2/comments/1', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .end((err, res) => {
+                assert.equal('alpha', res.body[0].profile_icon)
+                done()
+            })
+    })
+})
