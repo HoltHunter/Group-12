@@ -234,3 +234,47 @@ describe("View Posts", function() {
     })
 })
 
+
+
+
+
+describe("Check User Properties", function() {
+    it('Icon and theme match logged in user', function(done) {
+        chai.request(app)
+            .post('/auth/login', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json",},
+            })
+            .send({"username":"tony@stark.com","password":"ironman"})
+            .end((err, res) => {
+                console.log(res)
+                assert.equal(200, res.status)
+                done()
+            })
+    });
+    it('Correct icon on user post', function(done) {
+        chai.request(app)
+            .post('/search/posts', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .send({ "userId": 1 })
+            .end((err, res) => {
+                console.log(res.body[0].profile_icon)
+                assert.equal('alpha', res.body[0].profile_icon)
+                done()
+            })
+    })
+    it('Correct icon on user comment', function(done) {
+        chai.request(app)
+            .post('/search/posts/2/comments/1', {
+                withCredentials: true,
+                headers: {"Content-Type": "application/json"}
+            })
+            .end((err, res) => {
+                assert.equal('alpha', res.body[0].profile_icon)
+                console.log(res.body)
+                done()
+            })
+    })
+})
