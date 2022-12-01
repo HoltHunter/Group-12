@@ -247,8 +247,8 @@ describe("Check User Properties", function() {
             })
             .send({"username":"tony@stark.com","password":"ironman"})
             .end((err, res) => {
-                console.log(res.body[0].profile_icon)
-                assert.equal("alpha", res.body[0].profile_icon)
+                console.log(res.body[0])
+                assert.equal("alpha", res.body.profile_icon)
                 done()
             })
     });
@@ -260,8 +260,8 @@ describe("Check User Properties", function() {
             })
             .send({"username":"tony@stark.com","password":"ironman"})
             .end((err, res) => {
-                console.log(res.body[0].theme)
-                assert.equal("classic", res.body[0].theme)
+                console.log(res.body[0])
+                assert.equal("classic", res.body.theme)
                 done()
             })
     });
