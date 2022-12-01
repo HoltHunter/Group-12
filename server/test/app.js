@@ -247,7 +247,7 @@ describe("Check User Properties", function() {
             })
             .send({"username":"tony@stark.com","password":"ironman"})
             .end((err, res) => {
-                console.log(res)
+                console.log(res.body)
                 assert.equal(200, res.status)
                 done()
             })
@@ -260,7 +260,6 @@ describe("Check User Properties", function() {
             })
             .send({ "userId": 1 })
             .end((err, res) => {
-                console.log(res.body[0].profile_icon)
                 assert.equal('alpha', res.body[0].profile_icon)
                 done()
             })
@@ -273,7 +272,6 @@ describe("Check User Properties", function() {
             })
             .end((err, res) => {
                 assert.equal('alpha', res.body[0].profile_icon)
-                console.log(res.body)
                 done()
             })
     })
