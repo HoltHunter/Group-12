@@ -1,4 +1,4 @@
-const migrate = require("postgres-migrations");
+const migrate = require("postgres-migrations")
 
 // exports.connect = async (pool, path) => {
 exports.connect = async () => {
@@ -15,7 +15,7 @@ exports.connect = async () => {
 
         // Default: "postgres"
         // Used when checking/creating "database-name"
-        defaultDatabase: "postgres"
+        defaultDatabase: "postgres",
     }
 
     // await migrate.migrate(pool, path)

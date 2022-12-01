@@ -1,29 +1,28 @@
-import React from "react";
-import Comment from "./comment";
+import React from "react"
+import Comment from "./comment"
 import CreateComment from "./CreateComment"
 
-const CommentList = ( {comments, postId, session} ) => {
-  return (
-    <div>
-      <div className="ui hidden divider"></div>
-      <CreateComment
-        session={ session }
-        postId={ postId }
-      />
-      <div className="ui comments">
-          {
-            comments.map((comment) => {
-            return (
-                <div key={ comment.id } className="">
-                    <Comment 
-                      comment={ comment } 
-                    />
-                </div>
-            )
-        })}
-    </div>
-  </div>
-  )
+function CommentList({ comments, postId, session }) {
+    return (
+        <div>
+            <div className="ui hidden divider" />
+            <CreateComment
+                session={session}
+                postId={postId}
+            />
+            <div className="ui comments">
+                {
+                    comments.map((comment) => (
+                        <div key={comment.id} className="">
+                            <Comment
+                                comment={comment}
+                            />
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    )
 }
 
 export default CommentList
