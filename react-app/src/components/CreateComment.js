@@ -1,26 +1,22 @@
-import React from "react";
-import {useState} from 'react';
-import axios from '../apis/coreApp'
+import React, { useState } from "react"
+import axios from "../apis/coreApp"
 
+function CreateComment({ postId, session }) {
+    const [first, setFirst] = useState("")
 
+    const submitComment = async (event) => {
+        event.preventDefault()
 
-const CreateComment = ({ postId, session }) => {
-
-    const [first, setFirst] = useState('');
-
-    const submitComment = async ( event ) => {
-        event.preventDefault();
-
-        const reqBody = JSON.stringify({ userId: session.userId, postId: postId, comment: first })
-        const response = await axios.post('/create/post/comment', reqBody, {
+        const reqBody = JSON.stringify({ userId: session.userId, postId, comment: first })
+        const response = await axios.post("/create/post/comment", reqBody, {
             withCredentials: true,
-            headers: {"Content-Type": "application/json",}
+            headers: { "Content-Type": "application/json" },
         })
-        console.log(response);
+        console.log(response)
 
-        console.log('submitted', first, "to", postId);
-        console.log(session);
-        setFirst('');
+        console.log("submitted", first, "to", postId)
+        console.log(session)
+        setFirst("")
     }
 
     return (
@@ -28,12 +24,12 @@ const CreateComment = ({ postId, session }) => {
             <form onSubmit={submitComment} className="ui form">
                 <div className="field">
                     <div className="ui action input">
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             placeholder="Add Comment"
-                            onChange={event => setFirst(event.target.value)}
-                            value = {first}
-                            required 
+                            onChange={(event) => setFirst(event.target.value)}
+                            value={first}
+                            required
                         />
                         <button type="submit" className="ui button">Leave Comment</button>
                     </div>
@@ -41,7 +37,6 @@ const CreateComment = ({ postId, session }) => {
             </form>
         </div>
     )
-
 }
 
-export default CreateComment;
+export default CreateComment

@@ -1,20 +1,10 @@
-import React, { useEffect } from "react";
-import PostList from "./PostList";
-import { useState } from 'react'
-import axios from "../apis/coreApp";
-import { useParams } from "react-router-dom";
-import CreatePost from "./CreatePost";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import { useParams, Link } from "react-router-dom"
+import PostList from "./PostList"
+import axios from "../apis/coreApp"
+import CreatePost from "./CreatePost"
 
-// TODO:
-// Can we reuse a Comment component to also make new posts?
-// If Profile user =/= logged in user, and user is not logged in user's friend, show a Request Friend button.
-
-// Link to Profile can probably be a URL parameter. like .../profile/?userId=4
-
-// Feel free to refactor into a functional component if that makes it easier:
-
-const Profile = ({ session }) => {
+function Profile({ session }) {
     const [userPosts, setUserPosts] = useState([])
     const [userInfo, setUserInfo] = useState(null)
     const { id } = useParams()
@@ -27,48 +17,53 @@ const Profile = ({ session }) => {
 
     const retrieveUserInfo = async (userId) => {
         const reqBody = JSON.stringify({ userId: session.userId })
-        const response = await axios.post(`/search/users/${ userId }`, reqBody, {
+        const response = await axios.post(`/search/users/${userId}`, reqBody, {
             withCredentials: true,
-            headers: {"Content-Type": "application/json",}
+            headers: { "Content-Type": "application/json" },
         })
         setUserInfo(response.data[0])
     }
 
     const retrievePosts = async (userId) => {
         const reqBody = JSON.stringify({ userId })
-        const response = await axios.post(`/search/posts/${ userId }`, reqBody, {
+        const response = await axios.post(`/search/posts/${userId}`, reqBody, {
             withCredentials: true,
-            headers: {"Content-Type": "application/json",}
+            headers: { "Content-Type": "application/json" },
         })
         setUserPosts(response.data)
     }
 
     const getNotifications = async () => {
         const reqBody = JSON.stringify({ userId: session.userId })
-        const response = await axios.post(`/search/users/`, reqBody, {
+        const response = await axios.post("/search/users/", reqBody, {
             withCredentials: true,
-            headers: {"Content-Type": "application/json",}
+            headers: { "Content-Type": "application/json" },
         })
         setUserInfo(response.data[0])
     }
 
     return (
         <div className="ui container">
-            <h1>{ userInfo && userInfo.first_name } { userInfo && userInfo.last_name }
-            <Link to="/settings" className="item">
-                <i className="cog icon" />
-            </Link>
+            <h1>
+                { userInfo && userInfo.first_name }
+                {" "}
+                { userInfo && userInfo.last_name }
+                <Link to="/settings" className="item">
+                    <i className="cog icon" />
+                </Link>
             </h1>
             <h4>{ userInfo && userInfo.is_friend }</h4>
-            { session.userId == id && <div className="ui comments">
-                <CreatePost
-                    session={ session }
-                />
-            </div>}
+            { session.userId == id && (
+                <div className="ui comments">
+                    <CreatePost
+                        session={session}
+                    />
+                </div>
+            )}
             <div className="ui feed">
-                <PostList 
-                    session={ session }
-                    posts={ userPosts }
+                <PostList
+                    session={session}
+                    posts={userPosts}
                 />
             </div>
         </div>

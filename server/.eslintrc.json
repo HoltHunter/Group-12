@@ -7,7 +7,7 @@
     "extends": "airbnb-base",
     "overrides": [
         {
-            "files": ["*"],
+            "files": ["migrations/*", "routes/*", "src/*", "app.js", "setup.js"],
             "rules": {
                 "no-tabs": "off"
             }
